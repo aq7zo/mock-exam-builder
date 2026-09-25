@@ -1,0 +1,14 @@
+<!--
+  CITATION + EXCERPT
+  .citation: an inline link-style button (no capsule) that opens the Sources view at the cited page with the excerpt highlighted.
+    File-type icon (i-file-pdf / i-file-pptx / i-file-docx / i-file-text) + file name + location.
+    Location words: PDF "p. 12" / "pp. 10–14" · PPTX "slide 7" / "slides 4–6" · DOCX/text "section 3".
+    Grouped form ("where to study"): one link per file with merged page ranges.
+    Only shown AFTER an answer is revealed (practice feedback, answer review, weakness report).
+  .excerpt: the supporting sentence(s) quoted from the material, in the reading face (Arial).
+-->
+<div class="cluster">
+  <button type="button" class="citation" data-action="cite" data-item="t1-q06"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-file-pdf"/></svg><span class="citation__file">L02-Processes.pdf</span><span class="citation__loc">p. 3</span></button>
+  <button type="button" class="citation" data-action="cite" data-item="t2-q05"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-file-pptx"/></svg><span class="citation__file">L03-CPU-Scheduling.pptx</span><span class="citation__loc">slides 4–6</span></button>
+</div>
+<blockquote class="excerpt">A running process moves to the waiting state when it requests I/O, and returns to the ready state (not directly to running) when the I/O completes.</blockquote>

@@ -1,0 +1,23 @@
+<!--
+  REORDER LIST — section order screen before a mock exam
+  <ol class="reorder"> of draggable cards (draggable="true"), numbered automatically by CSS counter.
+  Each card: grip handle, index, topic name, meta (items in this exam + band), Up/Down buttons
+  (for touch and keyboard; disable Up on the first, Down on the last).
+  Drag feedback: data-dragging="true" on the dragged card. The drop target is the gap between cards
+  (gaps are droppable; the slot comes from the pointer's Y over the whole list). The card above the
+  slot gets data-drop="after" (bottom edge lit), the card below data-drop="before" (top edge lit).
+  Dropping next to the card's own position changes nothing and lights nothing.
+  Above the list: "Use recommended order" (weakest first) / "Use course order" buttons.
+-->
+<ol class="reorder" aria-label="Exam sections in order">
+  <li class="reorder__item" draggable="true" data-topic="t2">
+    <span class="reorder__handle" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-grip"/></svg></span>
+    <span class="reorder__index" aria-hidden="true"></span>
+    <span class="reorder__name">CPU Scheduling</span>
+    <span class="reorder__meta"><span>21 items</span><span class="band" data-band="weak"><span class="band__dot" aria-hidden="true">✕</span>Weak</span></span>
+    <span class="reorder__moves">
+      <button class="btn btn--icon btn--sm" aria-label="Move CPU Scheduling up" disabled><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chevron-up"/></svg></button>
+      <button class="btn btn--icon btn--sm" aria-label="Move CPU Scheduling down"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
+    </span>
+  </li>
+</ol>

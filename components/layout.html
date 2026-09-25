@@ -1,0 +1,20 @@
+<!--
+  LAYOUT PRIMITIVES — use these instead of any custom spacing.
+  .page (max-width container with side gutters; --read for single-column reading width)
+  .stack (vertical gap; --xs --sm --lg --xl) · .cluster (wrapping row; --between --end --lg)
+  .grid --2 / --3 / --4 (collapse to 1 column on phones) · .split (sidebar + main at ≥64rem; --wide-side)
+  .focus (centered reading column + side panel docked on its left; see focus-layout.html) · .page--full (uncapped width)
+  .section + .section-head (h2 + description + actions) for each block on a page.
+  Page heading pattern: .section-head with an h1; an .eyebrow above it only when it adds a fact the h1 lacks.
+  Text helpers: .eyebrow .lead .muted .small .xsmall .strong .num .truncate .nowrap .visually-hidden .no-print
+-->
+<div class="page stack stack--xl">
+  <div class="section-head">
+    <div class="section-head__text"><h1>CSOPESY Mock Midterms Exam</h1><p class="section-head__desc">Version 2 · Last updated Sep 25, 2026</p></div>
+    <div class="cluster"><button class="btn btn--sm">Print / Save PDF</button></div>
+  </div>
+  <section class="section">
+    <div class="section-head"><div class="section-head__text"><h2>Topic mastery</h2><p class="section-head__desc">From your latest mock exam.</p></div></div>
+    <div class="grid grid--2"><div class="card">…</div><div class="card">…</div></div>
+  </section>
+</div>

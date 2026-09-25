@@ -1,0 +1,33 @@
+<!--
+  TOP BAR + STATUS BAR
+  Top bar: lives in templates/base.html. Don't re-create it. Exam title (it already contains the class code) + theme toggle.
+  Status bar: sticky strip under the top bar, used only in the Mock Exam and Practice views
+  (answered/total + progress bar, timer, view toggle, Submit / End session).
+  The "Questions" button (.drawer-toggle) opens the navigator drawer on phone/tablet; it hides itself at ≥64rem.
+  Rendered by app.js → VIEWS.exam / VIEWS.practice.
+-->
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__brand" href="#" data-action="home"><span class="topbar__title">CSOPESY Mock Midterms Exam</span></a>
+    <div class="topbar__actions">
+      <button class="btn btn--ghost btn--icon" type="button" data-action="theme" aria-label="Switch light or dark theme"><svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="statusbar">
+  <div class="page">
+    <div class="statusbar__inner">
+      <button type="button" class="btn btn--sm drawer-toggle" data-action="drawer" aria-controls="qnav-drawer" aria-expanded="false"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-list"/></svg>Questions</button>
+      <div class="grow">
+        <div class="statusbar__progress">
+          <div class="progress__label"><span>34 of 100 answered</span><span class="num">34%</span></div>
+          <div class="progress" role="progressbar" aria-label="Answered" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" style="--pct: 34"></div>
+        </div>
+      </div>
+      <!-- Timer: data-warn="true" under 5 minutes left -->
+      <span class="timer"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg><span>41:20 left</span></span>
+      <button type="button" class="btn btn--primary btn--sm" data-action="submit-open"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Submit</button>
+    </div>
+  </div>
+</div>

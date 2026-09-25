@@ -1,0 +1,40 @@
+<!--
+  SOURCE BROWSER — Sources view (from a citation, or "Browse sources" on home)
+  Left: .sidebar with the sources/ folder as a .file-list. Each .file = type icon (data-type pdf|pptx|docx|text
+    tints it), name, question count. The cited file gets aria-current="true"; under it, .file-pages (| divided ghost filters) for
+    its cited pages (aria-pressed on the current one).
+  Right: .viewer — head (file, what it feeds, "Open original file" link: PDFs jump to #page=N&search=…;
+    PPTX says "Opens in PowerPoint — go to slide N"), the page text in .viewer__page (serif, pre-wrap)
+    with the excerpt in <mark id="cited"> (scrolled into view), and a Previous / Next .viewer__pager.
+  During an unsubmitted mock exam: file list + topics only; replace the page with a --warning callout.
+  "Back to question" / "Back to results" (btn--primary) returns to exactly where the student was.
+-->
+<div class="split split--wide-side">
+  <aside class="sidebar" aria-label="Files in sources">
+    <span class="eyebrow"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-folder"/></svg> sources/</span>
+    <ul class="file-list">
+      <li><button type="button" class="file" aria-current="true"><span class="file__icon" data-type="pdf"><svg class="icon" aria-hidden="true"><use href="#i-file-pdf"/></svg></span><span class="file__name">L02-Processes.pdf</span><span class="file__count">12 Q</span></button>
+        <ul class="file-pages" aria-label="Cited pages">
+          <li><button type="button" class="filter" aria-pressed="false">p. 2</button></li>
+          <li><button type="button" class="filter" aria-pressed="true">p. 3</button></li>
+        </ul></li>
+      <li><button type="button" class="file"><span class="file__icon" data-type="pptx"><svg class="icon" aria-hidden="true"><use href="#i-file-pptx"/></svg></span><span class="file__name">L03-CPU-Scheduling.pptx</span><span class="file__count">14 Q</span></button></li>
+    </ul>
+  </aside>
+  <div class="split__main viewer">
+    <div class="viewer__head">
+      <span class="file__icon" data-type="pdf"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-file-pdf"/></svg></span>
+      <div class="grow stack stack--xs"><h2 class="truncate">L02-Processes.pdf</h2><span class="small muted">Feeds: Processes · 5 pages</span></div>
+      <a class="btn btn--sm" href="sources/L02-Processes.pdf#page=3&amp;search=A%20running%20process" target="_blank" rel="noopener"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-external"/></svg>Open original file</a>
+    </div>
+    <p class="eyebrow">p. 3 · cited passage highlighted</p>
+    <div class="viewer__page" tabindex="0">Process states
+As a process executes, it changes state.
+<mark id="cited">A running process moves to the waiting state when it requests I/O, and returns to the ready state (not directly to running) when the I/O completes.</mark></div>
+    <div class="viewer__pager">
+      <button class="btn btn--sm"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chevron-left"/></svg>Previous</button>
+      <span class="small muted num">2 of 4 embedded</span>
+      <button class="btn btn--sm">Next<svg class="icon icon--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+    </div>
+  </div>
+</div>

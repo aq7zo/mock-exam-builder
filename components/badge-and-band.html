@@ -1,0 +1,28 @@
+<!--
+  BADGES, MASTERY BANDS, TRENDS
+  .band = mastery band as coloured glyph + label, no capsule. ALWAYS glyph + label (never color alone). Values via data-band:
+     mastered ★ (≥85%) · solid ✓ (70–84%) · review ! "Needs review" (50–69%) · weak ✕ (<50%) · none – "Not attempted"
+  .badge = small coloured status text; only --new keeps a capsule.  --new (added in this version, until attempted) · --focus (practice focus item)
+     --correct / --incorrect / --flag (answer review) · --outline (confidence: Guessing / Sure)
+  .trend = change since the previous mock exam: --up ▲ +12 · --down ▼ -8 · --flat – 0
+  .tag = plain meta text in a question header; consecutive tags get a "·" separator automatically.
+-->
+<div class="cluster">
+  <span class="band" data-band="mastered"><span class="band__dot" aria-hidden="true">★</span>Mastered</span>
+  <span class="band" data-band="solid"><span class="band__dot" aria-hidden="true">✓</span>Solid</span>
+  <span class="band" data-band="review"><span class="band__dot" aria-hidden="true">!</span>Needs review</span>
+  <span class="band" data-band="weak"><span class="band__dot" aria-hidden="true">✕</span>Weak</span>
+  <span class="band" data-band="none"><span class="band__dot" aria-hidden="true">–</span>Not attempted</span>
+</div>
+<div class="cluster">
+  <span class="badge badge--new">New</span>
+  <span class="badge badge--focus"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-target"/></svg>Focus</span>
+  <span class="badge badge--correct"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Correct</span>
+  <span class="badge badge--incorrect"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-x"/></svg>Incorrect</span>
+  <span class="badge badge--flag"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-flag"/></svg>Flagged</span>
+  <span class="badge badge--outline">Guessing</span>
+</div>
+<div class="cluster">
+  <span class="trend trend--up">▲ +12</span><span class="trend trend--down">▼ -8</span><span class="trend trend--flat">– 0</span>
+  <span class="tag">CPU Scheduling</span><span class="tag">Multiple choice</span>
+</div>

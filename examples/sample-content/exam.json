@@ -1,0 +1,1298 @@
+{
+ "manifest": {
+  "exam_id": "2f0c1f4e-8a7b-4c1d-9e57-3b1a6d9c0e21",
+  "class_code": "CSOPESY",
+  "term": "midterms",
+  "title": "CSOPESY Mock Midterms Exam",
+  "version": 2,
+  "generated": "2026-09-25",
+  "exam_length": 18,
+  "timer_minutes": null,
+  "coverage": "all",
+  "sources": [
+   {
+    "file": "L02-Processes.pdf",
+    "hash": "033fd9c178d019fc677f79290efe75ec399981d7f3e8d5656caeec2e4757e462",
+    "type": "pdf",
+    "pages": 5,
+    "added_in": 1
+   },
+   {
+    "file": "L03-CPU-Scheduling.pptx",
+    "hash": "c7b61447d29dd64e0cdee7d7e3c3507a606dacf4d8780ca5aa159e56583e01ab",
+    "type": "pptx",
+    "pages": 7,
+    "added_in": 1
+   },
+   {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "hash": "47feef49f0f54389003b838f0b185db2ce656ec72c89df4e97651021a470a25e",
+    "type": "pdf",
+    "pages": 4,
+    "added_in": 2
+   }
+  ],
+  "topics": [
+   {
+    "id": "t1",
+    "name": "Processes",
+    "subtopics": [
+     "Process concept",
+     "Process states",
+     "PCB and context switch",
+     "Process creation"
+    ],
+    "concepts": [
+     {
+      "id": "t1.program-vs-process",
+      "label": "Program vs. process"
+     },
+     {
+      "id": "t1.memory-layout",
+      "label": "Sections of a process's memory"
+     },
+     {
+      "id": "t1.states",
+      "label": "The five process states"
+     },
+     {
+      "id": "t1.transitions",
+      "label": "State transitions on I/O and interrupts"
+     },
+     {
+      "id": "t1.pcb",
+      "label": "What the PCB stores"
+     },
+     {
+      "id": "t1.context-switch",
+      "label": "Context switch and its cost"
+     },
+     {
+      "id": "t1.fork-exec",
+      "label": "fork() and exec()"
+     }
+    ],
+    "weight": 0.33,
+    "exam_quota": 6,
+    "added_in": 1
+   },
+   {
+    "id": "t2",
+    "name": "CPU Scheduling",
+    "subtopics": [
+     "Basics & criteria",
+     "FCFS",
+     "SJF",
+     "Round Robin",
+     "Priority"
+    ],
+    "concepts": [
+     {
+      "id": "t2.preemptive",
+      "label": "Preemptive vs. nonpreemptive scheduling"
+     },
+     {
+      "id": "t2.criteria",
+      "label": "Scheduling criteria"
+     },
+     {
+      "id": "t2.fcfs",
+      "label": "FCFS waiting times"
+     },
+     {
+      "id": "t2.convoy",
+      "label": "Convoy effect"
+     },
+     {
+      "id": "t2.sjf",
+      "label": "SJF optimality and burst prediction"
+     },
+     {
+      "id": "t2.srtf",
+      "label": "Shortest-remaining-time-first"
+     },
+     {
+      "id": "t2.rr",
+      "label": "Round-robin time quantum behaviour"
+     },
+     {
+      "id": "t2.priority",
+      "label": "Starvation and aging"
+     }
+    ],
+    "weight": 0.39,
+    "exam_quota": 7,
+    "added_in": 1
+   },
+   {
+    "id": "t3",
+    "name": "Threads and Concurrency",
+    "subtopics": [
+     "Thread basics",
+     "Concurrency & parallelism",
+     "Multithreading models"
+    ],
+    "concepts": [
+     {
+      "id": "t3.thread-def",
+      "label": "What a thread has and shares"
+     },
+     {
+      "id": "t3.benefits",
+      "label": "Benefits of multithreading"
+     },
+     {
+      "id": "t3.concurrency",
+      "label": "Concurrency vs. parallelism"
+     },
+     {
+      "id": "t3.amdahl",
+      "label": "Amdahl's Law"
+     },
+     {
+      "id": "t3.models",
+      "label": "Many-to-one, one-to-one, many-to-many"
+     }
+    ],
+    "weight": 0.28,
+    "exam_quota": 5,
+    "added_in": 2
+   }
+  ],
+  "changelog": [
+   {
+    "version": 1,
+    "date": "2026-09-11",
+    "summary": "First build from Lectures 2–3: Processes and CPU Scheduling."
+   },
+   {
+    "version": 2,
+    "date": "2026-09-25",
+    "summary": "Added Lecture 4 as a new topic, Threads and Concurrency (12 new questions). Your earlier results are kept."
+   }
+  ]
+ },
+ "items": [
+  {
+   "id": "t1-q01",
+   "topic": "t1",
+   "subtopic": "Process concept",
+   "concept": "t1.program-vs-process",
+   "concept_label": "Program vs. process",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "According to the lecture, what makes a process different from a program?",
+   "options": [
+    "A process is a program in execution with a program counter; a program is a passive file on disk",
+    "A process is stored on disk; a program is loaded in memory",
+    "A process is the compiled form of a program's source code",
+    "A process is a program that has finished execution"
+   ],
+   "answer": 0,
+   "explanation": "A process is a program in execution — an active entity with a program counter — while a program is a passive entity such as a file on disk. The second option reverses the two.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 2",
+    "page": 2,
+    "excerpt": "A process is a program in execution; it is an active entity with a program counter specifying the next instruction to execute."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q02",
+   "topic": "t1",
+   "subtopic": "Process concept",
+   "concept": "t1.program-vs-process",
+   "concept_label": "Program vs. process",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "easy",
+   "stem": "One program can be associated with several processes at the same time.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "explanation": "True. The lecture's example is several users running different copies of the same mail program, which gives several processes from one program.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 2",
+    "page": 2,
+    "excerpt": "One program can be several processes: for example, several users may run different copies of the same mail program."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q03",
+   "topic": "t1",
+   "subtopic": "Process concept",
+   "concept": "t1.memory-layout",
+   "concept_label": "Sections of a process's memory",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "Which section of a process's memory holds function parameters, return addresses and local variables?",
+   "options": [
+    "Heap",
+    "Data section",
+    "Stack",
+    "Text section"
+   ],
+   "answer": 2,
+   "explanation": "The stack holds temporary data: function parameters, return addresses and local variables. The heap is for memory allocated dynamically at run time.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 2",
+    "page": 2,
+    "excerpt": "Stack — temporary data such as function parameters, return addresses and local variables"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q04",
+   "topic": "t1",
+   "subtopic": "Process concept",
+   "concept": "t1.memory-layout",
+   "concept_label": "Sections of a process's memory",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "Memory that a process allocates dynamically while it runs is placed in the:",
+   "options": [
+    "Text section",
+    "Heap",
+    "Stack",
+    "Data section"
+   ],
+   "answer": 1,
+   "explanation": "The heap is memory dynamically allocated during run time. The data section holds global variables, not run-time allocations.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 2",
+    "page": 2,
+    "excerpt": "Heap — memory dynamically allocated during run time"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q05",
+   "topic": "t1",
+   "subtopic": "Process states",
+   "concept": "t1.states",
+   "concept_label": "The five process states",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "A process that is waiting to be assigned to a processor is in which state?",
+   "options": [
+    "Waiting",
+    "New",
+    "Running",
+    "Ready"
+   ],
+   "answer": 3,
+   "explanation": "Ready means waiting to be assigned to a processor. Waiting means waiting for an event such as an I/O completion, which is the tempting mix-up.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "Ready — the process is waiting to be assigned to a processor."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q06",
+   "topic": "t1",
+   "subtopic": "Process states",
+   "concept": "t1.transitions",
+   "concept_label": "State transitions on I/O and interrupts",
+   "type": "mcq",
+   "level": "apply",
+   "difficulty": "medium",
+   "stem": "A running process requests I/O. When the I/O completes, which state does the process move to next?",
+   "options": [
+    "Running",
+    "New",
+    "Terminated",
+    "Ready"
+   ],
+   "answer": 3,
+   "explanation": "The process goes running → waiting when it requests I/O, and back to ready — not directly to running — when the I/O completes.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "A running process moves to the waiting state when it requests I/O, and returns to the ready state (not directly to running) when the I/O completes."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q07",
+   "topic": "t1",
+   "subtopic": "Process states",
+   "concept": "t1.states",
+   "concept_label": "The five process states",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "easy",
+   "stem": "Two processes can be in the running state on the same processor core at the same instant.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "explanation": "False. Only one process can be running on any processor core at any instant; many others may be ready or waiting.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "Only one process can be running on any processor core at any instant."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q08",
+   "topic": "t1",
+   "subtopic": "PCB and context switch",
+   "concept": "t1.pcb",
+   "concept_label": "What the PCB stores",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "In the PCB, what does the program counter hold?",
+   "options": [
+    "The number of instructions executed so far",
+    "The process priority",
+    "The address of the next instruction to be executed",
+    "The list of open files"
+   ],
+   "answer": 2,
+   "explanation": "The program counter is the address of the next instruction to be executed. Priority and open files are separate PCB fields.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 4",
+    "page": 4,
+    "excerpt": "Program counter — the address of the next instruction to be executed"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q09",
+   "topic": "t1",
+   "subtopic": "PCB and context switch",
+   "concept": "t1.pcb",
+   "concept_label": "What the PCB stores",
+   "type": "tf",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "The list of a process's open files is kept in its PCB.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "explanation": "True. The PCB's I/O status information includes the list of open files.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 4",
+    "page": 4,
+    "excerpt": "I/O status information, such as the list of open files"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q10",
+   "topic": "t1",
+   "subtopic": "PCB and context switch",
+   "concept": "t1.context-switch",
+   "concept_label": "Context switch and its cost",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Why is context-switch time described as pure overhead?",
+   "options": [
+    "The PCB is deleted during every switch",
+    "The new process must be reloaded from disk",
+    "The CPU is turned off during the switch",
+    "The system does no useful work while switching"
+   ],
+   "answer": 3,
+   "explanation": "While saving the old process's state and loading the new one, the system does no useful work — that is why the lecture calls it pure overhead.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 5",
+    "page": 5,
+    "excerpt": "Context-switch time is pure overhead, because the system does no useful work while switching."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q11",
+   "topic": "t1",
+   "subtopic": "PCB and context switch",
+   "concept": "t1.context-switch",
+   "concept_label": "Context switch and its cost",
+   "type": "mcq",
+   "level": "analyze",
+   "difficulty": "hard",
+   "stem": "Based on what switching speed depends on, which change would make context switches slower?",
+   "options": [
+    "Faster memory",
+    "More hardware support for switching",
+    "More registers that must be copied",
+    "Fewer processes in the ready queue"
+   ],
+   "answer": 2,
+   "explanation": "Switching speed depends on memory speed, the number of registers to copy, and hardware support. More registers to copy means more work per switch; faster memory and more hardware support make it faster.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 5",
+    "page": 5,
+    "excerpt": "Switching speed depends on memory speed, the number of registers that must be copied, and hardware support."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q12",
+   "topic": "t1",
+   "subtopic": "Process creation",
+   "concept": "t1.fork-exec",
+   "concept_label": "fork() and exec()",
+   "type": "mcq",
+   "level": "apply",
+   "difficulty": "medium",
+   "stem": "After fork(), which value does the child process receive as the return value?",
+   "options": [
+    "The parent's PID",
+    "Zero",
+    "The child's own PID",
+    "The number of children the parent has"
+   ],
+   "answer": 1,
+   "explanation": "fork() returns zero in the child and the child's PID in the parent — so the child's own PID is what the parent sees, not the child.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 5",
+    "page": 5,
+    "excerpt": "fork() returns zero in the child process and the child's process identifier (PID) in the parent."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q13",
+   "topic": "t1",
+   "subtopic": "PCB and context switch",
+   "concept": "t1.pcb",
+   "concept_label": "What the PCB stores",
+   "type": "msq",
+   "level": "recall",
+   "difficulty": "medium",
+   "stem": "Which of the following are stored in a process's process control block (PCB)?",
+   "options": [
+    "The program counter",
+    "CPU-scheduling information, such as the process priority",
+    "The executable code of the program",
+    "I/O status information, such as the list of open files"
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "explanation": "The PCB lists the process state, program counter, CPU registers, CPU-scheduling, memory-management, accounting and I/O status information. The executable code lives in the process's text section in memory, not in the PCB.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 4",
+    "page": 4,
+    "excerpt": "The PCB contains:\n• Process state\n• Program counter — the address of the next instruction to be executed\n• CPU registers\n• CPU-scheduling information, such as the process priority\n• Memory-management information\n• Accounting information, such as CPU time used\n• I/O status information, such as the list of open files"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t1-q14",
+   "topic": "t1",
+   "subtopic": "Process states",
+   "concept": "t1.transitions",
+   "concept_label": "State transitions of a running process",
+   "type": "msq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Which events move a process out of the running state?",
+   "options": [
+    "The process requests I/O",
+    "An interrupt occurs",
+    "An I/O operation the process was waiting for completes",
+    "The process is being created"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "explanation": "Requesting I/O moves a running process to waiting, and an interrupt moves it back to ready. I/O completion moves a waiting process to ready, not a running one, and a process being created is in the new state.",
+   "source": {
+    "file": "L02-Processes.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "A running process moves to the waiting state when it requests I/O, and returns to the ready state (not directly to running) when the I/O completes. An interrupt moves a running process back to the ready state."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q01",
+   "topic": "t2",
+   "subtopic": "Basics & criteria",
+   "concept": "t2.preemptive",
+   "concept_label": "Preemptive vs. nonpreemptive scheduling",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Under nonpreemptive scheduling, when does a process give up the CPU?",
+   "options": [
+    "When its time quantum expires",
+    "When a higher-priority process arrives",
+    "Only when it terminates or switches to the waiting state",
+    "Whenever the scheduler decides to run another process"
+   ],
+   "answer": 2,
+   "explanation": "Nonpreemptive means the process keeps the CPU until it releases it by terminating or switching to the waiting state. Quantum expiry is a preemptive (round robin) event.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 2",
+    "page": 2,
+    "excerpt": "Scheduling is nonpreemptive when a process keeps the CPU until it releases it, either by terminating or by switching to the waiting state."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q02",
+   "topic": "t2",
+   "subtopic": "Basics & criteria",
+   "concept": "t2.criteria",
+   "concept_label": "Scheduling criteria",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "Which scheduling criterion measures the number of processes that complete per time unit?",
+   "options": [
+    "Throughput",
+    "Turnaround time",
+    "CPU utilization",
+    "Response time"
+   ],
+   "answer": 0,
+   "explanation": "Throughput is the number of processes that complete their execution per time unit. Turnaround time is how long one process takes from submission to completion.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 3",
+    "page": 3,
+    "excerpt": "Throughput — number of processes that complete their execution per time unit"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q03",
+   "topic": "t2",
+   "subtopic": "Basics & criteria",
+   "concept": "t2.criteria",
+   "concept_label": "Scheduling criteria",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Waiting time, as defined in the lecture, counts only the time a process spends:",
+   "options": [
+    "from submission to completion",
+    "in the ready queue",
+    "doing I/O",
+    "until the first response is produced"
+   ],
+   "answer": 1,
+   "explanation": "Waiting time is the time spent waiting in the ready queue. Submission-to-completion is turnaround time; until-first-response is response time.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 3",
+    "page": 3,
+    "excerpt": "Waiting time — amount of time a process has been waiting in the ready queue"
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q04",
+   "topic": "t2",
+   "subtopic": "Basics & criteria",
+   "concept": "t2.criteria",
+   "concept_label": "Scheduling criteria",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "easy",
+   "stem": "A scheduler should try to maximize response time.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "explanation": "False. Utilization and throughput are maximized; turnaround, waiting and response time are minimized.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 3",
+    "page": 3,
+    "excerpt": "We want to maximize utilization and throughput, and minimize turnaround, waiting and response time."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q05",
+   "topic": "t2",
+   "subtopic": "FCFS",
+   "concept": "t2.fcfs",
+   "concept_label": "FCFS waiting times",
+   "type": "mcq",
+   "level": "apply",
+   "difficulty": "medium",
+   "stem": "Under FCFS, P1 = 24 ms, P2 = 3 ms and P3 = 3 ms arrive in the order P1, P2, P3. What is the average waiting time?",
+   "options": [
+    "3 ms",
+    "10 ms",
+    "17 ms",
+    "27 ms"
+   ],
+   "answer": 2,
+   "explanation": "The waiting times are 0, 24 and 27 ms, so the average is (0 + 24 + 27) / 3 = 17 ms. 27 ms is P3's waiting time alone.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 4",
+    "page": 4,
+    "excerpt": "Average waiting time = (0 + 24 + 27) / 3 = 17 ms."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q06",
+   "topic": "t2",
+   "subtopic": "FCFS",
+   "concept": "t2.fcfs",
+   "concept_label": "FCFS waiting times",
+   "type": "mcq",
+   "level": "apply",
+   "difficulty": "hard",
+   "stem": "The same three processes (P1 = 24 ms, P2 = 3 ms, P3 = 3 ms) arrive in the order P2, P3, P1 under FCFS. What is the average waiting time now?",
+   "options": [
+    "3 ms",
+    "6 ms",
+    "17 ms",
+    "24 ms"
+   ],
+   "answer": 0,
+   "explanation": "With the short jobs first the waiting times are P1 = 6, P2 = 0, P3 = 3, so the average is (6 + 0 + 3) / 3 = 3 ms. 6 ms is P1's waiting time alone.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 4",
+    "page": 4,
+    "excerpt": "If they arrive in the order P2, P3, P1, the average waiting time is (6 + 0 + 3) / 3 = 3 ms."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q07",
+   "topic": "t2",
+   "subtopic": "FCFS",
+   "concept": "t2.convoy",
+   "concept_label": "Convoy effect",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "easy",
+   "stem": "What is the convoy effect?",
+   "options": [
+    "Short processes wait behind one long process",
+    "Low-priority processes never execute",
+    "The quantum is so small that context switches dominate",
+    "Processes are preempted at the end of each time quantum"
+   ],
+   "answer": 0,
+   "explanation": "The convoy effect is short processes waiting behind one long process under FCFS. Low-priority processes never executing is starvation, a different problem.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 4",
+    "page": 4,
+    "excerpt": "Convoy effect: short processes wait behind one long process."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q08",
+   "topic": "t2",
+   "subtopic": "FCFS",
+   "concept": "t2.fcfs",
+   "concept_label": "FCFS waiting times",
+   "type": "tf",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "FCFS is a preemptive scheduling algorithm.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "explanation": "False. The lecture states that FCFS is nonpreemptive.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 4",
+    "page": 4,
+    "excerpt": "FCFS is nonpreemptive."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q09",
+   "topic": "t2",
+   "subtopic": "SJF",
+   "concept": "t2.sjf",
+   "concept_label": "SJF optimality and burst prediction",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Why is SJF hard to implement exactly?",
+   "options": [
+    "It causes the convoy effect",
+    "The length of the next CPU burst can only be estimated",
+    "It needs a very large time quantum",
+    "It gives the maximum average waiting time"
+   ],
+   "answer": 1,
+   "explanation": "SJF needs the length of the next CPU burst, which can only be estimated (for example, by exponential averaging). SJF actually gives the minimum average waiting time, not the maximum.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 5",
+    "page": 5,
+    "excerpt": "The difficulty is knowing the length of the next CPU request; it can only be estimated, for example by exponential averaging of previous bursts."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q10",
+   "topic": "t2",
+   "subtopic": "SJF",
+   "concept": "t2.sjf",
+   "concept_label": "SJF optimality and burst prediction",
+   "type": "tf",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "SJF gives the minimum average waiting time for a given set of processes.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "explanation": "True. The lecture calls SJF optimal because it gives the minimum average waiting time for a given set of processes.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 5",
+    "page": 5,
+    "excerpt": "SJF is optimal: it gives the minimum average waiting time for a given set of processes."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q11",
+   "topic": "t2",
+   "subtopic": "SJF",
+   "concept": "t2.srtf",
+   "concept_label": "Shortest-remaining-time-first",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "What is the preemptive version of SJF called?",
+   "options": [
+    "Round robin",
+    "Priority scheduling with aging",
+    "Shortest-remaining-time-first",
+    "First-come, first-served"
+   ],
+   "answer": 2,
+   "explanation": "The preemptive version of SJF is shortest-remaining-time-first.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 5",
+    "page": 5,
+    "excerpt": "The preemptive version is called shortest-remaining-time-first."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q12",
+   "topic": "t2",
+   "subtopic": "Round Robin",
+   "concept": "t2.rr",
+   "concept_label": "Round-robin time quantum behaviour",
+   "type": "mcq",
+   "level": "analyze",
+   "difficulty": "hard",
+   "stem": "In round robin, what happens if the time quantum is made very large?",
+   "options": [
+    "Context-switch overhead becomes too high",
+    "RR behaves the same as FCFS",
+    "Low-priority processes starve",
+    "RR becomes SJF"
+   ],
+   "answer": 1,
+   "explanation": "With a very large quantum no process is ever preempted, so RR behaves the same as FCFS. High context-switch overhead is what happens when the quantum is very small.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 6",
+    "page": 6,
+    "excerpt": "If the quantum is very large, RR behaves the same as FCFS."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q13",
+   "topic": "t2",
+   "subtopic": "Round Robin",
+   "concept": "t2.rr",
+   "concept_label": "Round-robin time quantum behaviour",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "easy",
+   "stem": "In round robin, a preempted process is added to the end of the ready queue.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "explanation": "True. When its time quantum elapses, the process is preempted and added to the end of the ready queue.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 6",
+    "page": 6,
+    "excerpt": "After this time has elapsed, the process is preempted and added to the end of the ready queue."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q14",
+   "topic": "t2",
+   "subtopic": "Priority",
+   "concept": "t2.priority",
+   "concept_label": "Starvation and aging",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Which technique does the lecture give as the solution to starvation in priority scheduling?",
+   "options": [
+    "Aging",
+    "Exponential averaging",
+    "A larger time quantum",
+    "The convoy effect"
+   ],
+   "answer": 0,
+   "explanation": "Aging gradually increases the priority of processes that have waited a long time, so they eventually run. Exponential averaging is for predicting SJF burst lengths.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 7",
+    "page": 7,
+    "excerpt": "Solution: aging — gradually increase the priority of processes that wait in the system for a long time."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q15",
+   "topic": "t2",
+   "subtopic": "Basics & criteria",
+   "concept": "t2.criteria",
+   "concept_label": "Which scheduling criteria to minimize",
+   "type": "msq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "Which scheduling criteria should a good CPU scheduler minimize?",
+   "options": [
+    "Turnaround time",
+    "Waiting time",
+    "Throughput",
+    "CPU utilization",
+    "Response time"
+   ],
+   "answer": [
+    0,
+    1,
+    4
+   ],
+   "explanation": "The lecture says to minimize turnaround, waiting and response time. Throughput and CPU utilization are the two criteria to maximize.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 3",
+    "page": 3,
+    "excerpt": "We want to maximize utilization and throughput, and minimize turnaround, waiting and response time."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t2-q16",
+   "topic": "t2",
+   "subtopic": "Round Robin",
+   "concept": "t2.rr",
+   "concept_label": "Choosing the round-robin time quantum",
+   "type": "msq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Which statements about choosing the round-robin time quantum are correct?",
+   "options": [
+    "A very large quantum makes RR behave like FCFS",
+    "A very small quantum makes context-switch overhead too high",
+    "About 80 percent of CPU bursts should be shorter than the quantum",
+    "A very small quantum makes RR behave like SJF"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "explanation": "A large quantum means processes finish their bursts before being preempted, which is FCFS; a tiny quantum causes too many context switches; and the rule of thumb is that 80 percent of bursts fit in one quantum. Nothing in the lecture links a small quantum to SJF.",
+   "source": {
+    "file": "L03-CPU-Scheduling.pptx",
+    "loc": "slide 6",
+    "page": 6,
+    "excerpt": "If the quantum is very large, RR behaves the same as FCFS.\nIf the quantum is very small, the overhead of context switches becomes too high.\nRule of thumb: 80 percent of CPU bursts should be shorter than the time quantum."
+   },
+   "added_in": 1
+  },
+  {
+   "id": "t3-q01",
+   "topic": "t3",
+   "subtopic": "Thread basics",
+   "concept": "t3.thread-def",
+   "concept_label": "What a thread has and shares",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "Which of these does each thread have for itself, rather than share with the other threads of its process?",
+   "options": [
+    "The code section",
+    "Open files",
+    "Its own stack",
+    "The data section"
+   ],
+   "answer": 2,
+   "explanation": "Each thread has its own thread ID, program counter, register set and stack. The code section, data section and open files are shared.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 1",
+    "page": 1,
+    "excerpt": "It comprises a thread ID, a program counter, a register set, and a stack."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q02",
+   "topic": "t3",
+   "subtopic": "Thread basics",
+   "concept": "t3.thread-def",
+   "concept_label": "What a thread has and shares",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "easy",
+   "stem": "Threads of the same process share the process's open files.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "explanation": "True. Threads of one process share its code section, data section and OS resources such as open files and signals.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 1",
+    "page": 1,
+    "excerpt": "A thread shares with other threads belonging to the same process its code section, data section, and other operating-system resources, such as open files and signals."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q03",
+   "topic": "t3",
+   "subtopic": "Thread basics",
+   "concept": "t3.benefits",
+   "concept_label": "Benefits of multithreading",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "An application keeps responding to the user while one of its threads performs a lengthy operation. Which benefit of multithreading is this?",
+   "options": [
+    "Economy",
+    "Scalability",
+    "Resource sharing",
+    "Responsiveness"
+   ],
+   "answer": 3,
+   "explanation": "Responsiveness: the application keeps running even if part of it is blocked or doing a lengthy operation. Scalability is about running on several cores.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 2",
+    "page": 2,
+    "excerpt": "Responsiveness — an application can keep running even if part of it is blocked or performing a lengthy operation."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q04",
+   "topic": "t3",
+   "subtopic": "Thread basics",
+   "concept": "t3.benefits",
+   "concept_label": "Benefits of multithreading",
+   "type": "mcq",
+   "level": "recall",
+   "difficulty": "easy",
+   "stem": "Which benefit of multithreading refers to threads running in parallel on different processing cores?",
+   "options": [
+    "Scalability",
+    "Economy",
+    "Responsiveness",
+    "Resource sharing"
+   ],
+   "answer": 0,
+   "explanation": "Scalability: threads may run in parallel on different processing cores. Economy is about threads being cheaper to create and switch than processes.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 2",
+    "page": 2,
+    "excerpt": "Scalability — threads may run in parallel on different processing cores."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q05",
+   "topic": "t3",
+   "subtopic": "Concurrency & parallelism",
+   "concept": "t3.concurrency",
+   "concept_label": "Concurrency vs. parallelism",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "It is possible to have concurrency without parallelism.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "explanation": "True. On a single-core system tasks are interleaved over time, so they all make progress without running simultaneously.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "It is possible to have concurrency without parallelism: on a single-core system, tasks are interleaved over time."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q06",
+   "topic": "t3",
+   "subtopic": "Concurrency & parallelism",
+   "concept": "t3.concurrency",
+   "concept_label": "Concurrency vs. parallelism",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Which statement describes a parallel system?",
+   "options": [
+    "It interleaves tasks on a single core",
+    "It can perform more than one task simultaneously",
+    "It lets tasks make progress by taking turns",
+    "It runs only one thread per process"
+   ],
+   "answer": 1,
+   "explanation": "A parallel system performs more than one task simultaneously. Interleaving tasks so all make progress describes concurrency.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "A parallel system can perform more than one task simultaneously."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q07",
+   "topic": "t3",
+   "subtopic": "Concurrency & parallelism",
+   "concept": "t3.amdahl",
+   "concept_label": "Amdahl's Law",
+   "type": "mcq",
+   "level": "apply",
+   "difficulty": "medium",
+   "stem": "An application is 25 percent serial. By Amdahl's Law, what is the most speedup it can get when moving from one to two cores?",
+   "options": [
+    "1.25 times",
+    "1.6 times",
+    "2 times",
+    "4 times"
+   ],
+   "answer": 1,
+   "explanation": "speedup ≤ 1 / (0.25 + 0.75 / 2) = 1 / 0.625 = 1.6. 4 times is the limit as the number of cores grows without bound (1 / S).",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "Example: an application that is 25 percent serial gets a speedup of at most 1.6 times when moving from one to two cores."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q08",
+   "topic": "t3",
+   "subtopic": "Concurrency & parallelism",
+   "concept": "t3.amdahl",
+   "concept_label": "Amdahl's Law",
+   "type": "mcq",
+   "level": "analyze",
+   "difficulty": "hard",
+   "stem": "As the number of cores N approaches infinity, what does Amdahl's Law say the speedup converges to?",
+   "options": [
+    "N",
+    "S / N",
+    "1 − S",
+    "1 / S"
+   ],
+   "answer": 3,
+   "explanation": "As N grows, the (1 − S) / N term vanishes and the speedup converges to 1 / S — the serial portion sets the ceiling.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 3",
+    "page": 3,
+    "excerpt": "As N approaches infinity, the speedup converges to 1 / S."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q09",
+   "topic": "t3",
+   "subtopic": "Multithreading models",
+   "concept": "t3.models",
+   "concept_label": "Many-to-one, one-to-one, many-to-many",
+   "type": "tf",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "In the many-to-one model, threads of one process can run in parallel on a multicore system.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "explanation": "False. In many-to-one, threads cannot run in parallel on multicore systems, and one blocking system call blocks the entire process.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 4",
+    "page": 4,
+    "excerpt": "If one thread makes a blocking system call, the entire process blocks, and threads cannot run in parallel on multicore systems."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q10",
+   "topic": "t3",
+   "subtopic": "Multithreading models",
+   "concept": "t3.models",
+   "concept_label": "Many-to-one, one-to-one, many-to-many",
+   "type": "mcq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "What is the main drawback of the one-to-one model?",
+   "options": [
+    "A blocking call blocks the entire process",
+    "Threads cannot run in parallel",
+    "Creating a user thread requires creating the corresponding kernel thread",
+    "User threads are managed without kernel support"
+   ],
+   "answer": 2,
+   "explanation": "One-to-one gives more concurrency, but every user thread needs a corresponding kernel thread. Blocking the whole process is a drawback of many-to-one.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 4",
+    "page": 4,
+    "excerpt": "It provides more concurrency, but creating a user thread requires creating the corresponding kernel thread."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q11",
+   "topic": "t3",
+   "subtopic": "Thread basics",
+   "concept": "t3.thread-def",
+   "concept_label": "What threads of one process share",
+   "type": "msq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Which of these do threads of the same process share with each other?",
+   "options": [
+    "The code section",
+    "The data section",
+    "The stack",
+    "Open files",
+    "The program counter"
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "explanation": "Threads of one process share its code section, data section and operating-system resources such as open files. Each thread has its own thread ID, program counter, register set and stack.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 1",
+    "page": 1,
+    "excerpt": "A thread shares with other threads belonging to the same process its code section, data section, and other operating-system resources, such as open files and signals."
+   },
+   "added_in": 2
+  },
+  {
+   "id": "t3-q12",
+   "topic": "t3",
+   "subtopic": "Multithreading models",
+   "concept": "t3.models",
+   "concept_label": "Limits of the many-to-one model",
+   "type": "msq",
+   "level": "understand",
+   "difficulty": "medium",
+   "stem": "Which statements describe the many-to-one multithreading model?",
+   "options": [
+    "If one thread makes a blocking system call, the entire process blocks",
+    "Its threads cannot run in parallel on a multicore system",
+    "Each user thread maps to its own kernel thread",
+    "Creating a user thread requires creating a kernel thread"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "explanation": "In many-to-one, all user threads share one kernel thread, so one blocking call blocks the whole process and the threads cannot run in parallel. A kernel thread per user thread describes the one-to-one model.",
+   "source": {
+    "file": "L04-Threads-and-Concurrency.pdf",
+    "loc": "p. 4",
+    "page": 4,
+    "excerpt": "Many-to-one — many user threads map to one kernel thread. If one thread makes a blocking system call, the entire process blocks, and threads cannot run in parallel on multicore systems."
+   },
+   "added_in": 2
+  }
+ ],
+ "source_pages": {
+  "L02-Processes.pdf": {
+   "1": "Lecture 2: Processes\nCSOPESY — Introduction to Operating Systems\n\nLearning objectives\n• Define a process and distinguish it from a program.\n• Describe the five process states and the transitions between them.\n• Explain what the process control block (PCB) stores.\n• Describe how a context switch works and why it is overhead.",
+   "2": "What is a process?\nA program is a passive entity, such as a file containing a list of instructions stored on disk. A process is a program in execution; it is an active entity with a program counter specifying the next instruction to execute.\nA program becomes a process when an executable file is loaded into memory.\nOne program can be several processes: for example, several users may run different copies of the same mail program.\n\nMemory layout of a process\n• Text section — the executable code\n• Data section — global variables\n• Heap — memory dynamically allocated during run time\n• Stack — temporary data such as function parameters, return addresses and local variables",
+   "3": "Process states\nAs a process executes, it changes state.\n• New — the process is being created.\n• Ready — the process is waiting to be assigned to a processor.\n• Running — instructions are being executed.\n• Waiting — the process is waiting for some event to occur, such as an I/O completion.\n• Terminated — the process has finished execution.\nOnly one process can be running on any processor core at any instant. Many processes may be ready and waiting.\nA running process moves to the waiting state when it requests I/O, and returns to the ready state (not directly to running) when the I/O completes. An interrupt moves a running process back to the ready state.",
+   "4": "Process control block (PCB)\nEach process is represented in the operating system by a process control block, also called a task control block.\nThe PCB contains:\n• Process state\n• Program counter — the address of the next instruction to be executed\n• CPU registers\n• CPU-scheduling information, such as the process priority\n• Memory-management information\n• Accounting information, such as CPU time used\n• I/O status information, such as the list of open files\nThe PCB serves as the repository for all the data needed to start, or restart, a process.",
+   "5": "Context switch\nWhen the CPU switches to another process, the system must save the state of the old process and load the saved state for the new process. This task is known as a context switch.\nThe context of a process is represented in its PCB.\nContext-switch time is pure overhead, because the system does no useful work while switching.\nSwitching speed depends on memory speed, the number of registers that must be copied, and hardware support.\n\nProcess creation\nA parent process creates child processes, forming a tree of processes. In UNIX, the fork() system call creates a new process that is a copy of the parent's address space. fork() returns zero in the child process and the child's process identifier (PID) in the parent. The exec() system call is used after fork() to replace the process's memory space with a new program."
+  },
+  "L03-CPU-Scheduling.pptx": {
+   "1": "CPU Scheduling\nLecture 3 — CSOPESY\nGoal: maximize CPU utilization in a multiprogrammed system.",
+   "2": "CPU–I/O burst cycle\nProcess execution consists of a cycle of CPU execution and I/O wait.\nThe CPU scheduler selects a process from the processes in memory that are ready to execute and allocates the CPU to it.\nScheduling is nonpreemptive when a process keeps the CPU until it releases it, either by terminating or by switching to the waiting state. Otherwise, scheduling is preemptive.",
+   "3": "Scheduling criteria\n• CPU utilization — keep the CPU as busy as possible\n• Throughput — number of processes that complete their execution per time unit\n• Turnaround time — amount of time to execute a particular process, from submission to completion\n• Waiting time — amount of time a process has been waiting in the ready queue\n• Response time — time from when a request was submitted until the first response is produced\nWe want to maximize utilization and throughput, and minimize turnaround, waiting and response time.",
+   "4": "First-Come, First-Served (FCFS)\nThe process that requests the CPU first is allocated the CPU first. FCFS is nonpreemptive.\nExample: P1 = 24 ms, P2 = 3 ms, P3 = 3 ms, arriving in the order P1, P2, P3.\nWaiting times: P1 = 0, P2 = 24, P3 = 27. Average waiting time = (0 + 24 + 27) / 3 = 17 ms.\nIf they arrive in the order P2, P3, P1, the average waiting time is (6 + 0 + 3) / 3 = 3 ms.\nConvoy effect: short processes wait behind one long process.",
+   "5": "Shortest-Job-First (SJF)\nSJF associates with each process the length of its next CPU burst and schedules the process with the shortest next burst.\nSJF is optimal: it gives the minimum average waiting time for a given set of processes.\nThe difficulty is knowing the length of the next CPU request; it can only be estimated, for example by exponential averaging of previous bursts.\nThe preemptive version is called shortest-remaining-time-first.",
+   "6": "Round Robin (RR)\nEach process gets a small unit of CPU time, called a time quantum, usually 10 to 100 milliseconds. After this time has elapsed, the process is preempted and added to the end of the ready queue.\nIf the quantum is very large, RR behaves the same as FCFS.\nIf the quantum is very small, the overhead of context switches becomes too high.\nRule of thumb: 80 percent of CPU bursts should be shorter than the time quantum.",
+   "7": "Priority scheduling\nA priority number is associated with each process, and the CPU is allocated to the process with the highest priority (in this course, the smallest integer means the highest priority).\nSJF is priority scheduling where the priority is the predicted next CPU burst time.\nProblem: starvation — low-priority processes may never execute.\nSolution: aging — gradually increase the priority of processes that wait in the system for a long time."
+  },
+  "L04-Threads-and-Concurrency.pdf": {
+   "1": "Lecture 4: Threads and Concurrency\nA thread is a basic unit of CPU utilization. It comprises a thread ID, a program counter, a register set, and a stack.\nA thread shares with other threads belonging to the same process its code section, data section, and other operating-system resources, such as open files and signals.",
+   "2": "Benefits of multithreaded programming\n• Responsiveness — an application can keep running even if part of it is blocked or performing a lengthy operation.\n• Resource sharing — threads share the memory and resources of the process to which they belong by default.\n• Economy — creating and context-switching threads is cheaper than creating and switching processes.\n• Scalability — threads may run in parallel on different processing cores.",
+   "3": "Concurrency vs. parallelism\nA concurrent system supports more than one task by allowing all the tasks to make progress.\nA parallel system can perform more than one task simultaneously.\nIt is possible to have concurrency without parallelism: on a single-core system, tasks are interleaved over time.\n\nAmdahl's Law\nspeedup ≤ 1 / (S + (1 − S) / N), where S is the serial portion of the application and N is the number of processing cores.\nExample: an application that is 25 percent serial gets a speedup of at most 1.6 times when moving from one to two cores.\nAs N approaches infinity, the speedup converges to 1 / S.",
+   "4": "Multithreading models\nUser threads are managed above the kernel without kernel support; kernel threads are supported and managed directly by the operating system.\n• Many-to-one — many user threads map to one kernel thread. If one thread makes a blocking system call, the entire process blocks, and threads cannot run in parallel on multicore systems.\n• One-to-one — each user thread maps to a kernel thread. It provides more concurrency, but creating a user thread requires creating the corresponding kernel thread.\n• Many-to-many — many user threads are multiplexed onto a smaller or equal number of kernel threads."
+  }
+ },
+ "footer": "Sample exam for the Mock Exam Builder design reference · CSOPESY Mock Midterms Exam · version 2 · built only from the files in sources/"
+}

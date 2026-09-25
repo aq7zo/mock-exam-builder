@@ -1,0 +1,62 @@
+<!--
+  QUESTION (answering state) — Mock Exam and Practice
+  .question card: meta line (number, topic, format, optional New/Focus badge) → stem → options → tools.
+  Options are real radio inputs inside <label class="option"> (keyboard + screen-reader friendly).
+    .option__key shows A–D for multiple choice, T / F for true/false.
+    True/False uses .options--inline (two side-by-side buttons); the stem is a statement.
+    Multiple select uses .options--multi (square keys), role="group", checkbox inputs, the tag
+    "Multiple select" and a "Select all that apply." line under the stem. In Practice it adds a
+    .question__tools row with a "Check answer" button (disabled until an option is ticked).
+  Mock Exam only: .question__tools with Flag for review (aria-pressed) and Confidence (segmented: Guessing / Sure).
+  Practice only: an extra <label class="option option--skip"> "Not sure / Skip" (key "?"). NEVER in the mock exam.
+  data-current="true" outlines the current question in the "All questions" view.
+-->
+<article class="question" id="q-11" data-index="11">
+  <div class="question__meta">
+    <span class="question__number">Question 12 of 100</span><span class="tag">CPU Scheduling</span><span class="tag">Multiple choice</span>
+    <span class="badge badge--new">New</span>
+  </div>
+  <p class="question__stem">In round robin, what happens if the time quantum is made very large?</p>
+  <ul class="options" role="radiogroup" aria-label="Answer choices">
+    <li><label class="option"><input type="radio" name="q-t2-q12" value="0"><span class="option__key" aria-hidden="true">A</span><span class="option__text">Context-switch overhead becomes too high</span></label></li>
+    <li><label class="option"><input type="radio" name="q-t2-q12" value="1" checked><span class="option__key" aria-hidden="true">B</span><span class="option__text">RR behaves the same as FCFS</span></label></li>
+    <li><label class="option"><input type="radio" name="q-t2-q12" value="2"><span class="option__key" aria-hidden="true">C</span><span class="option__text">Low-priority processes starve</span></label></li>
+    <li><label class="option"><input type="radio" name="q-t2-q12" value="3"><span class="option__key" aria-hidden="true">D</span><span class="option__text">RR becomes SJF</span></label></li>
+  </ul>
+  <div class="question__tools">
+    <button type="button" class="btn btn--sm" aria-pressed="false"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-flag"/></svg>Flag for review</button>
+    <div class="cluster">
+      <span class="segmented__caption">Confidence</span>
+      <div class="segmented" role="radiogroup" aria-label="Confidence">
+        <span class="segmented__option"><input type="radio" id="c-t2-q12-guess" name="c-t2-q12" value="guess"><label class="segmented__label" for="c-t2-q12-guess">Guessing</label></span>
+        <span class="segmented__option"><input type="radio" id="c-t2-q12-sure" name="c-t2-q12" value="sure" checked><label class="segmented__label" for="c-t2-q12-sure">Sure</label></span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Multiple select (Practice, before Check answer) -->
+<article class="question">
+  <div class="question__meta"><span class="question__number">Question 1 of 10</span><span class="tag">Threads and Concurrency</span><span class="tag">Multiple select</span></div>
+  <p class="question__stem">Which of these do threads of the same process share with each other?</p>
+  <p class="small muted">Select all that apply.</p>
+  <ul class="options options--multi" role="group" aria-label="Answer choices">
+    <li><label class="option"><input type="checkbox" name="p-0" value="0" checked><span class="option__key" aria-hidden="true">A</span><span class="option__text">The code section</span></label></li>
+    <li><label class="option"><input type="checkbox" name="p-0" value="1"><span class="option__key" aria-hidden="true">B</span><span class="option__text">The data section</span></label></li>
+    <li><label class="option"><input type="checkbox" name="p-0" value="2"><span class="option__key" aria-hidden="true">C</span><span class="option__text">The stack</span></label></li>
+    <li><label class="option"><input type="checkbox" name="p-0" value="3" checked><span class="option__key" aria-hidden="true">D</span><span class="option__text">Open files</span></label></li>
+    <li><label class="option option--skip"><input type="radio" name="p-0" value="skip"><span class="option__key" aria-hidden="true">?</span><span class="option__text">Not sure / Skip</span></label></li>
+  </ul>
+  <div class="question__tools"><span class="push"></span><button type="button" class="btn btn--primary"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Check answer</button></div>
+</article>
+
+<!-- True/False + Practice skip -->
+<article class="question">
+  <div class="question__meta"><span class="question__number">Question 3 of 10</span><span class="tag">Threads</span><span class="tag">True / False</span><span class="badge badge--focus">Focus</span></div>
+  <p class="question__stem">It is possible to have concurrency without parallelism.</p>
+  <ul class="options options--inline" role="radiogroup" aria-label="Answer choices">
+    <li><label class="option"><input type="radio" name="p-3" value="0"><span class="option__key" aria-hidden="true">T</span><span class="option__text">True</span></label></li>
+    <li><label class="option"><input type="radio" name="p-3" value="1"><span class="option__key" aria-hidden="true">F</span><span class="option__text">False</span></label></li>
+    <li><label class="option option--skip"><input type="radio" name="p-3" value="skip"><span class="option__key" aria-hidden="true">?</span><span class="option__text">Not sure / Skip</span></label></li>
+  </ul>
+</article>

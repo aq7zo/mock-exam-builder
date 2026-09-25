@@ -1,0 +1,26 @@
+<!--
+  CALLOUT
+  A boxed message with icon + title + body + optional actions. Pick the variant by meaning:
+    (default) info — e.g. "Weakest topics first is recommended", "New in version 2"
+    --success — good news ("No misconceptions", "All questions answered")
+    --warning — needs attention ("Exam in progress", unanswered items, lucky guesses)
+    --danger  — top-priority problems (misconceptions) or errors
+    --neutral — quiet notes ("Practice results — doesn't affect mastery.")
+  Never use a callout just for decoration; one or two per screen.
+-->
+<div class="callout callout--warning">
+  <span class="callout__icon"><svg class="icon" aria-hidden="true"><use href="#i-history"/></svg></span>
+  <div class="callout__body">
+    <p class="callout__title">You have a mock exam in progress</p>
+    <div>34 of 100 answered · 22:10 elapsed. Your answers are saved in this browser.</div>
+    <div class="callout__actions">
+      <button class="btn btn--primary btn--sm">Resume exam</button>
+      <button class="btn btn--sm btn--danger">Discard</button>
+    </div>
+  </div>
+</div>
+
+<div class="callout callout--neutral">
+  <span class="callout__icon"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg></span>
+  <div class="callout__body"><p class="callout__title">Practice results — doesn’t affect mastery.</p><div>Take a mock exam to update your mastery.</div></div>
+</div>

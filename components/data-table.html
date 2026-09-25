@@ -1,0 +1,26 @@
+<!--
+  DATA TABLE
+  For ranked or comparable rows, e.g. a coverage table. (The results screen no longer uses one:
+  the section breakdown already carries score, band and trend.) Always wrap in .table-wrap: it scrolls sideways inside itself on phones, so the
+  page never scrolls horizontally. Numbers get class="num" (right-aligned, tabular).
+  Row headers use <th scope="row">. Put action columns in .no-print.
+-->
+<div class="table-wrap">
+  <table class="table">
+    <thead>
+      <tr><th scope="col">Topic</th><th scope="col" class="num">Score</th><th scope="col">Band</th><th scope="col" class="num">Missed concepts</th><th scope="col" class="no-print"><span class="visually-hidden">Action</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">CPU Scheduling</th><td class="num">43%</td>
+        <td><span class="band" data-band="weak"><span class="band__dot" aria-hidden="true">✕</span>Weak</span></td>
+        <td class="num">4</td><td class="no-print"><button class="btn btn--sm btn--ghost">Practice</button></td>
+      </tr>
+      <tr>
+        <th scope="row">Processes</th><td class="num">92%</td>
+        <td><span class="band" data-band="mastered"><span class="band__dot" aria-hidden="true">★</span>Mastered</span></td>
+        <td class="num">1</td><td class="no-print"><button class="btn btn--sm btn--ghost">Practice</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

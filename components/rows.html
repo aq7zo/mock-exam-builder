@@ -1,0 +1,19 @@
+<!--
+  ROWS — Topic mastery panel and Mock exam history (home)
+  <div class="card card--flush"><ul class="rows"> with one .row per topic / attempt.
+  .row__main (title + meta) on the left, .row__aside (trend, band, score) on the right; wraps on phones.
+  No row tint for weak topics: the .band text is the one signal.
+  Clickable rows (history → results): .row--link + role="link" + tabindex="0".
+-->
+<div class="card card--flush">
+  <ul class="rows">
+    <li class="row">
+      <div class="row__main"><span class="row__title">CPU Scheduling</span><span class="row__meta">3 of 7 correct (43%) · 2 mock exams</span></div>
+      <div class="row__aside"><span class="trend trend--down">▼ -14</span><span class="band" data-band="weak"><span class="band__dot" aria-hidden="true">✕</span>Weak</span></div>
+    </li>
+    <li class="row row--link" role="link" tabindex="0" data-action="open-attempt">
+      <div class="row__main"><span class="row__title">Attempt 2 · Sep 25, 2026, 3:20 PM</span><span class="row__meta">82 of 100 correct · took 1:12:40</span></div>
+      <div class="row__aside"><span class="strong num">82%</span><span class="band" data-band="solid"><span class="band__dot" aria-hidden="true">✓</span>Solid</span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg></div>
+    </li>
+  </ul>
+</div>

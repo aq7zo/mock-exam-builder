@@ -1,0 +1,37 @@
+<!--
+  QUESTION NAVIGATOR (sidebar / drawer)
+  Left column of .split in the Mock Exam view (Practice uses focus-layout.html). Sticky sidebar on desktop (≥64rem);
+  off-canvas drawer on phone/tablet (data-open="true" to show, with .drawer-scrim behind it).
+  Exam: one collapsible <details class="qnav__section"> per section in the chosen order, answered/total count,
+    numbered .chip buttons. (Practice: a single .qnav__section inside the focus layout's side panel.)
+  Chip states: data-state = unanswered | answered | correct | incorrect | skipped
+               data-flagged="true" (amber dot) · data-focus="true" (blue dot) · aria-current="true" (outlined)
+  Each chip carries an aria-label spelling out its state. Include the .chip-legend.
+-->
+<div class="split">
+  <aside class="sidebar sidebar--drawer" id="qnav-drawer" data-open="false" aria-label="Question navigator">
+    <div class="sidebar__head"><span class="eyebrow">Sections</span>
+      <button type="button" class="btn btn--ghost btn--icon btn--sm sidebar__close" aria-label="Close navigator"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <button type="button" class="btn btn--sm btn--block">Jump to next unanswered</button>
+    <nav class="qnav">
+      <details class="qnav__section" open>
+        <summary class="qnav__summary"><span class="qnav__name">1. CPU Scheduling</span><span class="qnav__count">3/7</span></summary>
+        <div class="chips">
+          <button type="button" class="chip" data-state="answered" aria-label="Question 1, answered">1</button>
+          <button type="button" class="chip" data-state="answered" data-flagged="true" aria-label="Question 2, answered, flagged">2</button>
+          <button type="button" class="chip" data-state="answered" aria-label="Question 3, answered">3</button>
+          <button type="button" class="chip" data-state="unanswered" aria-current="true" aria-label="Question 4, not answered">4</button>
+          <button type="button" class="chip" data-state="unanswered" aria-label="Question 5, not answered">5</button>
+        </div>
+      </details>
+    </nav>
+    <div class="chip-legend" aria-hidden="true">
+      <span class="chip-legend__item"><span class="chip"></span>Unanswered</span>
+      <span class="chip-legend__item"><span class="chip" data-state="answered"></span>Answered</span>
+      <span class="chip-legend__item"><span class="chip" data-flagged="true"></span>Flagged</span>
+      <span class="chip-legend__item"><span class="chip" aria-current="true"></span>Current</span>
+    </div>
+  </aside>
+  <div class="drawer-scrim" hidden></div>
+  <div class="split__main stack"><!-- question(s) here --></div>
+</div>

@@ -1,0 +1,26 @@
+<!--
+  CARD
+  Generic container for grouped content. Title + description + optional foot with actions.
+  Variants: --interactive (whole card is a button: home entry points)
+            --accent (the primary entry point: Mock exam — accent border, no icon tile, no side stripe)
+            --flush (no padding; wraps .rows lists) · --inset (quiet grey box, e.g. export/import note)
+  Entry cards (home): <button class="card card--interactive entry">: title + description, no icon.
+  Topic cards (practice picker, weakness report): .card + .card__head (title + band) + .card__foot.
+-->
+<div class="grid grid--3">
+  <button class="card card--interactive card--accent entry" data-action="start-order">
+    <span class="card__title">Mock exam</span>
+    <span class="card__desc">100 items across 6 topics. Answers are revealed only after you submit.</span>
+  </button>
+
+  <div class="card">
+    <div class="card__head">
+      <div class="grow stack stack--xs"><span class="card__title">CPU Scheduling</span><span class="small muted">14 questions · practiced 2 times</span></div>
+      <span class="band" data-band="weak"><span class="band__dot" aria-hidden="true">✕</span>Weak</span>
+    </div>
+    <p class="small">4 of 7 missed in your last mock exam</p>
+    <div class="card__foot"><button type="button" class="btn btn--primary btn--sm">Practice topic</button></div>
+  </div>
+
+  <div class="card card--inset"><p class="small muted">Progress is saved in this browser only.</p></div>
+</div>

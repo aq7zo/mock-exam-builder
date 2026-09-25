@@ -1,0 +1,23 @@
+<!--
+  STAT TILE + SCORE HERO
+  .score-hero: top of the Results view only. The big percentage + band, a caption with the change
+  vs previous attempt, then one sentence: misconceptions first (text-incorrect), lucky guesses, flagged, time.
+  .stat: one headline number with a label above and a short foot below. Use for counts
+  (practice summary: first-try %, fixed on retry). No charts inside.
+  .stat__unit for a trailing unit ("%", "/5") in a smaller size.
+-->
+<div class="score-hero">
+  <div class="stack stack--sm">
+    <span class="score-hero__value">82%</span>
+    <span class="band" data-band="solid"><span class="band__dot" aria-hidden="true">✓</span>Solid</span>
+  </div>
+  <div class="stack">
+    <p class="score-hero__caption">82 of 100 correct · <span class="trend trend--up">▲ +9</span> vs previous mock exam (73%)</p>
+    <div class="stat-grid">
+      <div class="stat"><span class="stat__label">Time taken</span><span class="stat__value">1:12:40</span><span class="stat__foot">of 100 min</span></div>
+      <div class="stat"><span class="stat__label">Misconceptions</span><span class="stat__value">4</span><span class="stat__foot">wrong while sure</span></div>
+      <div class="stat"><span class="stat__label">Lucky guesses</span><span class="stat__value">6</span><span class="stat__foot">right while guessing</span></div>
+      <div class="stat"><span class="stat__label">First try</span><span class="stat__value">70<span class="stat__unit">%</span></span><span class="stat__foot">7 of 10 correct</span></div>
+    </div>
+  </div>
+</div>

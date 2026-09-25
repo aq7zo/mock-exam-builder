@@ -1,0 +1,32 @@
+<!--
+  PROGRESS BAR + METER LIST
+  .progress: thin bar for answered/total (status bar). Set the value with the data variable
+    style="--pct: N" (0–100). This is the ONLY inline style allowed in any output.
+  .meter-list > .meter: labelled horizontal bars. Used for Section breakdown (data-band = the
+    topic's band, bars colored by band, band + trend in the last column) and Score by question type
+    (data-band="accent": neutral bars, since those aren't mastery bands).
+  Desktop: label | bar | value | band in one row (bars align: fixed label/value/band columns).
+  Phone: label + value, then bar, then band row.
+-->
+<div class="progress" role="progressbar" aria-label="Answered" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" style="--pct: 34"></div>
+
+<ul class="meter-list">
+  <li class="meter" data-band="mastered">
+    <span class="meter__label">Processes</span>
+    <span class="meter__track" role="img" aria-label="92%"><span class="meter__fill" style="--pct: 92"></span></span>
+    <span class="meter__value">11/12</span>
+    <span class="meter__band"><span class="band" data-band="mastered"><span class="band__dot" aria-hidden="true">★</span>Mastered</span> <span class="trend trend--up">▲ +8</span></span>
+  </li>
+  <li class="meter" data-band="weak">
+    <span class="meter__label">CPU Scheduling</span>
+    <span class="meter__track" role="img" aria-label="43%"><span class="meter__fill" style="--pct: 43"></span></span>
+    <span class="meter__value">6/14</span>
+    <span class="meter__band"><span class="band" data-band="weak"><span class="band__dot" aria-hidden="true">✕</span>Weak</span></span>
+  </li>
+  <li class="meter" data-band="accent">
+    <span class="meter__label">Apply</span>
+    <span class="meter__track" role="img" aria-label="55%"><span class="meter__fill" style="--pct: 55"></span></span>
+    <span class="meter__value">11/20</span>
+    <span class="meter__band"><span class="small muted num">55%</span></span>
+  </li>
+</ul>

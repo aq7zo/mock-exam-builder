@@ -1,0 +1,33 @@
+<!--
+  QUESTION (revealed state) — Answer review and Practice feedback
+  Options become static (<div class="option">, list has aria-disabled="true") with data-state:
+    correct   → the right answer (status "Correct answer", or "Your answer" if they picked it)
+    incorrect → the student's wrong pick (status "Your answer")
+  Status text always pairs with a ✓ / ✕ icon, never color alone.
+  Multiple select: the same rule per option, so every correct option is "correct" and every wrong
+  pick is "incorrect"; untouched wrong options stay plain. Scoring is all-or-nothing.
+  Below: .feedback (--correct / --incorrect / --skipped) = verdict (practice only) + explanation
+  + the supporting .excerpt + a .citation button to the exact page.
+  Answer review adds coloured status text (.badge) in the meta line: Correct/Incorrect/Unanswered, Flagged, confidence.
+-->
+<article class="question" id="review-t2-q05">
+  <div class="question__meta">
+    <span class="question__number">Question 5</span><span class="tag">CPU Scheduling</span><span class="tag">Multiple choice</span>
+    <span class="badge badge--incorrect"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-x"/></svg>Incorrect</span>
+    <span class="badge badge--outline">Sure</span>
+  </div>
+  <p class="question__stem">Under FCFS, P1 = 24 ms, P2 = 3 ms and P3 = 3 ms arrive in the order P1, P2, P3. What is the average waiting time?</p>
+  <ul class="options" role="radiogroup" aria-label="Answer choices" aria-disabled="true">
+    <li><div class="option"><span class="option__key" aria-hidden="true">A</span><span class="option__text">3 ms</span></div></li>
+    <li><div class="option"><span class="option__key" aria-hidden="true">B</span><span class="option__text">10 ms</span></div></li>
+    <li><div class="option" data-state="correct"><span class="option__key" aria-hidden="true">C</span><span class="option__text">17 ms</span><span class="option__status"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Correct answer</span></div></li>
+    <li><div class="option" data-state="incorrect"><span class="option__key" aria-hidden="true">D</span><span class="option__text">27 ms</span><span class="option__status"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-x"/></svg>Your answer</span></div></li>
+  </ul>
+  <div class="feedback feedback--incorrect" role="status">
+    <p class="feedback__verdict"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Not quite</p>
+    <p class="feedback__body">The waiting times are 0, 24 and 27 ms, so the average is (0 + 24 + 27) / 3 = 17 ms. 27 ms is P3's waiting time alone.</p>
+    <blockquote class="excerpt">Average waiting time = (0 + 24 + 27) / 3 = 17 ms.</blockquote>
+    <div><button type="button" class="citation" data-action="cite" data-item="t2-q05"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-file-pptx"/></svg><span class="citation__file">L03-CPU-Scheduling.pptx</span><span class="citation__loc">slide 4</span></button></div>
+  </div>
+</article>
+<!-- Verdict variants: feedback--correct "✓ Correct" · feedback--skipped "? Skipped — here’s the answer" -->

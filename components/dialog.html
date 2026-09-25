@@ -1,0 +1,16 @@
+<!--
+  DIALOG — native <dialog id="dialog"> in base.html, filled by app.js openDialog().
+  Use for confirmations only: Submit mock exam (lists unanswered + flagged questions as clickable chips),
+  Discard in-progress exam. Head (title + one-line consequence), body, foot (secondary left, primary right).
+-->
+<dialog class="dialog" open aria-labelledby="dialog-title">
+  <div class="dialog__inner">
+    <div class="dialog__head"><h2 id="dialog-title">Submit your mock exam?</h2><p class="muted small">After you submit, your answers are locked and the results are recorded in your mastery.</p></div>
+    <div class="dialog__body">
+      <div class="callout callout--warning"><span class="callout__icon"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg></span>
+        <div class="callout__body"><p class="callout__title">3 unanswered questions</p><div>Unanswered questions are marked wrong. Select one to go back to it.</div></div></div>
+      <div class="chips"><button type="button" class="chip" aria-label="Go to question 14">14</button><button type="button" class="chip" aria-label="Go to question 52">52</button><button type="button" class="chip" aria-label="Go to question 97">97</button></div>
+    </div>
+    <div class="dialog__foot"><button type="button" class="btn">Keep working</button><button type="button" class="btn btn--primary">Submit exam</button></div>
+  </div>
+</dialog>

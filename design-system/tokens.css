@@ -1,0 +1,249 @@
+/* ==========================================================================
+   Mock Exam Builder — design tokens
+   Every visual decision lives here as a CSS custom property. components.css
+   reads only these variables; nothing else in the output may hard-code a
+   color, font, size, radius or shadow.
+
+   Direction: calm, focused, academic. A quiet paper-white page, one ink-blue
+   accent for actions, and reserved semantic colors for exam states
+   (correct / incorrect / flagged) and mastery bands. Fonts are system stacks
+   so the file works offline with no external requests.
+
+   Mastery band colors were checked with the dataviz palette validator
+   (light on #ffffff, dark on #1a1b1e): lightness band, chroma, CVD and
+   normal-vision separation pass. Bands always ship with an icon + label.
+   ========================================================================== */
+
+/* Fonts: design-system/fonts/*.woff2, Latin subset, OFL-1.1. build.py inlines each url("fonts/…")
+   as a data: URI so the exam stays one offline file. Bebas Neue = display headings only (one weight);
+   Inter (variable 100–900) = everything else. */
+@font-face { font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/bebas-neue-latin-400.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght.woff2") format("woff2"); }
+
+:root {
+  color-scheme: light;
+
+  /* ---- Font families ---------------------------------------------------- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;  /* h1, h2, top-bar title, score */
+  --font-read: Arial, "Liberation Sans", Arimo, "Helvetica Neue", Helvetica, sans-serif;  /* source viewer + quoted excerpts */
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Menlo", "Consolas", monospace;
+
+  /* ---- Type scale (rem; 1rem = 16px) ------------------------------------ */
+  --fs-2xs: 0.6875rem;   /* chip numbers, tiny captions */
+  --fs-xs: 0.75rem;      /* badges, meta */
+  --fs-sm: 0.875rem;     /* secondary text, tables */
+  --fs-base: 1rem;       /* body, options */
+  --fs-md: 1.125rem;     /* question stem */
+  --fs-lg: 1.375rem;     /* section titles */
+  --fs-xl: 1.75rem;      /* page titles */
+  --fs-2xl: 2.25rem;     /* stat values */
+  --fs-hero: 3.5rem;     /* result score */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-base: 1.55;
+  --lh-read: 1.7;        /* source viewer */
+  --lh-none: 1;          /* icon glyphs, hero numbers */
+
+  --tracking-caps: 0.06em;
+  --tracking-tight: -0.01em;
+  --tracking-display: 0.02em;   /* Bebas Neue is tight; open it slightly */
+
+  /* ---- Spacing scale (4px grid) ---------------------------------------- */
+  --sp-0: 0;
+  --sp-px: 1px;
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-7: 2rem;
+  --sp-8: 2.5rem;
+  --sp-9: 3rem;
+  --sp-10: 4rem;
+
+  --gutter: var(--sp-4);          /* page side gutter at phone width */
+  --gutter-wide: var(--sp-7);     /* page side gutter on desktop */
+
+  /* ---- Sizes & widths --------------------------------------------------- */
+  --w-page: 72rem;       /* home, results, practice picker */
+  --w-read: 46rem;       /* one question / reading column */
+  --w-sidebar: 18.5rem;  /* exam navigator, file list */
+  --w-sidepanel: 15rem;  /* docked practice session panel (left of the centered question) */
+  --w-dialog: 34rem;
+  --w-drawer-max: 88vw;  /* drawer never covers the whole phone screen */
+  --w-flex-sm: 8rem;     /* flex-basis for small items (true/false options, progress) */
+  --w-flex-md: 12rem;    /* flex-basis for list rows */
+  --w-flex-lg: 18rem;    /* flex-basis for heading text blocks */
+  --w-meter-label: 11rem;
+  --w-meter-value: 4.5rem;
+  --w-meter-band: 10rem;   /* band + trend column, fixed so bars align */
+  --h-topbar: 3.5rem;
+  --h-control: 2.5rem;   /* buttons, inputs */
+  --h-control-sm: 2rem;
+  --h-touch: 2.75rem;    /* minimum touch target */
+  --h-bar: 0.5rem;       /* progress / meter bar thickness */
+  --h-bar-lg: 0.75rem;
+  --size-chip: 2.25rem;  /* question navigator chip */
+  --size-icon: 1.125rem;
+  --size-icon-sm: 0.875rem;
+  --size-icon-lg: 1.5rem;
+  --size-key: 1.75rem;   /* option letter bubble */
+
+  /* ---- Borders, radii, shadows ----------------------------------------- */
+  --bw-1: 1px;
+  --bw-2: 2px;
+  --bw-3: 3px;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgb(20 24 31 / 0.06), 0 1px 1px rgb(20 24 31 / 0.04);
+  --shadow-2: 0 4px 12px rgb(20 24 31 / 0.08), 0 1px 3px rgb(20 24 31 / 0.06);
+  --shadow-3: 0 16px 40px rgb(20 24 31 / 0.18), 0 2px 8px rgb(20 24 31 / 0.08);
+  --focus-ring: 0 0 0 3px var(--c-focus);
+
+  /* ---- Motion & layers -------------------------------------------------- */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --z-sticky: 20;
+  --z-drawer: 40;
+  --z-toast: 60;
+
+  --opacity-disabled: 0.5;
+  --opacity-muted: 0.72;
+
+  /* ---- Color: neutrals -------------------------------------------------- */
+  --c-bg: #f6f6f3;            /* page */
+  --c-surface: #ffffff;       /* cards, questions */
+  --c-surface-2: #f0f0eb;     /* inset areas, table header, sidebar */
+  --c-surface-3: #e7e6e0;     /* hover on inset, track of bars */
+  --c-border: #e1e0d9;
+  --c-border-strong: #c9c7be;
+  --c-ink: #1b1d21;           /* primary text */
+  --c-ink-2: #474a51;         /* secondary text */
+  --c-ink-3: #686b72;         /* muted text, meta (≥4.5:1 on surface) */
+  --c-ink-inverse: #ffffff;
+  --c-scrim: rgb(15 17 21 / 0.45);
+
+  /* ---- Color: accent (actions, current, links) ------------------------- */
+  --c-accent: #2f56d3;
+  --c-accent-strong: #2143ad;
+  --c-accent-soft: #e8edfc;
+  --c-accent-ink: #1e3c9c;    /* accent text on soft background */
+  --c-focus: rgb(47 86 211 / 0.35);
+
+  /* ---- Color: semantic exam states ------------------------------------- */
+  --c-correct: #1c7a39;
+  --c-correct-soft: #e5f3e9;
+  --c-correct-border: #9fd1ad;
+  --c-incorrect: #b42318;
+  --c-incorrect-soft: #fcebe9;
+  --c-incorrect-border: #efb1aa;
+  --c-flag: #9a5b00;          /* flagged, warnings */
+  --c-flag-soft: #fdf2da;
+  --c-flag-border: #ecc774;
+  --c-info: var(--c-accent-ink);
+  --c-info-soft: var(--c-accent-soft);
+  --c-info-border: #b8c6f3;
+  --c-new: #6b3fc4;           /* "New" badge */
+  --c-new-soft: #f0eafc;
+  --c-highlight: #fff0a6;     /* <mark> excerpt in source viewer */
+  --c-highlight-ink: #1b1d21;
+
+  /* ---- Color: mastery bands (validated set) ---------------------------- */
+  --c-band-mastered: #1f8f3f;
+  --c-band-solid: #2b7bb9;
+  --c-band-review: #d9910d;
+  --c-band-weak: #d03b3b;
+  --c-band-none: #9a9ca1;
+  --c-band-mastered-soft: #e4f3e8;
+  --c-band-solid-soft: #e3eff8;
+  --c-band-review-soft: #fcf1dc;
+  --c-band-weak-soft: #fbe7e7;
+  --c-band-none-soft: #eeeeec;
+  --c-band-mastered-ink: #17692f;
+  --c-band-solid-ink: #1f5d8c;
+  --c-band-review-ink: #8a5a00;
+  --c-band-weak-ink: #a82c2c;
+  --c-band-none-ink: #5d6066;
+
+  /* ---- File-type icon tints -------------------------------------------- */
+  --c-file-pdf: #c2412d;
+  --c-file-slides: #c7641a;
+  --c-file-doc: #2b62c4;
+  --c-file-text: #5d6066;
+}
+
+/* Dark theme — only when the viewer picks it with the toggle; light is the default. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --c-bg: #111214;
+  --c-surface: #1a1b1e;
+  --c-surface-2: #212226;
+  --c-surface-3: #2b2d32;
+  --c-border: #2d2f34;
+  --c-border-strong: #43464d;
+  --c-ink: #ececea;
+  --c-ink-2: #bfc1c5;
+  --c-ink-3: #9a9da3;
+  --c-ink-inverse: #111214;
+  --c-scrim: rgb(0 0 0 / 0.6);
+
+  --c-accent: #7d9bff;
+  --c-accent-strong: #a3b8ff;
+  --c-accent-soft: #1f2849;
+  --c-accent-ink: #b8c8ff;
+  --c-focus: rgb(125 155 255 / 0.45);
+
+  --c-correct: #5cc27a;
+  --c-correct-soft: #16281c;
+  --c-correct-border: #2f5d3b;
+  --c-incorrect: #ff8a7e;
+  --c-incorrect-soft: #331a18;
+  --c-incorrect-border: #6e3029;
+  --c-flag: #f0b43c;
+  --c-flag-soft: #2e2512;
+  --c-flag-border: #6a5220;
+  --c-info-border: #34437a;
+  --c-new: #b99bff;
+  --c-new-soft: #271d40;
+  --c-highlight: #5a4c10;
+  --c-highlight-ink: #fff6d0;
+
+  --c-band-mastered: #35a055;
+  --c-band-solid: #4a8fd0;
+  --c-band-review: #ad850a;
+  --c-band-weak: #e85d80;
+  --c-band-none: #6c6f76;
+  --c-band-mastered-soft: #17291d;
+  --c-band-solid-soft: #16243a;
+  --c-band-review-soft: #2b2310;
+  --c-band-weak-soft: #331a22;
+  --c-band-none-soft: #25262a;
+  --c-band-mastered-ink: #7fd499;
+  --c-band-solid-ink: #8fbdf0;
+  --c-band-review-ink: #e8c35c;
+  --c-band-weak-ink: #ff9bb3;
+  --c-band-none-ink: #b3b5ba;
+
+  --c-file-pdf: #ff8c78;
+  --c-file-slides: #f5a15e;
+  --c-file-doc: #86a9ff;
+  --c-file-text: #b3b5ba;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 4px 14px rgb(0 0 0 / 0.45);
+  --shadow-3: 0 18px 44px rgb(0 0 0 / 0.6);
+}

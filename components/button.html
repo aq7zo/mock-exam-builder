@@ -1,0 +1,18 @@
+<!--
+  BUTTON
+  .btn is the base. One .btn--primary per area (the main next step: Start mock exam, Next, Submit).
+  Variants: --primary (main action) · (default) secondary · --ghost (low-emphasis, table rows, close)
+            --danger (Discard) · --link (inline text action inside sentences, e.g. study plan)
+  Sizes:    --sm (toolbars, cards) · --lg (page-level CTA) · --block (full width) · --icon (square, needs aria-label)
+  Toggle:   aria-pressed="true" turns a button into the flagged state (Flag for review).
+  Icons: inline SVG from the base.html sprite: <svg class="icon icon--sm"><use href="#i-NAME"/></svg>
+-->
+<div class="cluster">
+  <button type="button" class="btn btn--primary btn--lg"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-play"/></svg>Start mock exam</button>
+  <button type="button" class="btn">Use course order</button>
+  <button type="button" class="btn btn--sm" aria-pressed="true"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-flag"/></svg>Flagged</button>
+  <button type="button" class="btn btn--ghost btn--sm">Practice</button>
+  <button type="button" class="btn btn--sm btn--danger"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-trash"/></svg>Discard</button>
+  <button type="button" class="btn btn--ghost btn--icon" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+  <p class="small">Read the pages, then <button type="button" class="btn btn--link">practice this topic</button>.</p>
+</div>

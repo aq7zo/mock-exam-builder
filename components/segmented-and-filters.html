@@ -1,0 +1,19 @@
+<!--
+  SEGMENTED CONTROL + FILTERS (ghost text buttons divided by |; active = full ink on surface-2)
+  .segmented: one choice from 2–4 options that change a setting (Confidence, One at a time / All,
+    session length 10 / 20 / All). Radio inputs + labels.
+  .filters > .filter: toggle buttons with aria-pressed that filter a list (answer review: All /
+    Incorrect / Flagged / Guessed with .filter__count; practice subtopics; cited pages in Sources).
+-->
+<div class="segmented" role="radiogroup" aria-label="Session length">
+  <span class="segmented__option"><input type="radio" id="len-10" name="plen" value="10" checked><label class="segmented__label" for="len-10">10</label></span>
+  <span class="segmented__option"><input type="radio" id="len-20" name="plen" value="20"><label class="segmented__label" for="len-20">20</label></span>
+  <span class="segmented__option"><input type="radio" id="len-all" name="plen" value="all"><label class="segmented__label" for="len-all">All</label></span>
+</div>
+
+<div class="filters" role="group" aria-label="Filter answers">
+  <button type="button" class="filter" aria-pressed="true">All <span class="filter__count">100</span></button>
+  <button type="button" class="filter" aria-pressed="false">Incorrect <span class="filter__count">18</span></button>
+  <button type="button" class="filter" aria-pressed="false">Flagged <span class="filter__count">6</span></button>
+  <button type="button" class="filter" aria-pressed="false">Guessed <span class="filter__count">22</span></button>
+</div>

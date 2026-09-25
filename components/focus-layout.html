@@ -1,0 +1,43 @@
+<!--
+  FOCUS LAYOUT — Practice session
+  One centered question column (.focus__main, max width --w-read). The session panel (.focus__side,
+  width --w-sidepanel) docks to the LEFT of the question card at ≥64rem, and becomes the off-canvas
+  drawer below that (add .sidebar .sidebar--drawer to it + a .drawer-scrim + a .drawer-toggle button).
+  The status bar above uses the SAME .focus grid, so the progress bar + "End session" button are
+  exactly as wide as the question card. Wrap both in .page.page--full so the card centers on the
+  viewport (on narrow desktops it shifts right just enough to fit the panel).
+  Use .split (question-navigator.html) for the Mock Exam instead: its navigator has many more chips.
+-->
+<div class="statusbar">
+  <div class="page page--full">
+    <div class="focus">
+      <div class="focus__main statusbar__inner">
+        <button type="button" class="btn btn--sm drawer-toggle" aria-controls="qnav-drawer" aria-expanded="false"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-list"/></svg>Questions</button>
+        <div class="grow statusbar__progress">
+          <div class="progress__label"><span>Practice · Processes</span><span class="num">3/10</span></div>
+          <div class="progress" role="progressbar" aria-label="Practice progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30" style="--pct: 30"></div>
+        </div>
+        <button type="button" class="btn btn--sm">End session</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page page--full">
+  <div class="focus">
+    <aside class="sidebar sidebar--drawer focus__side" id="qnav-drawer" data-open="false" aria-label="Session questions">
+      <div class="sidebar__head"><span class="eyebrow">This session</span>
+        <button type="button" class="btn btn--ghost btn--icon btn--sm sidebar__close" aria-label="Close"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <div class="qnav__section"><div class="chips">
+        <button type="button" class="chip" data-state="correct" data-focus="true" aria-label="Question 1, correct, focus">1</button>
+        <button type="button" class="chip" data-state="incorrect" aria-label="Question 2, incorrect">2</button>
+        <button type="button" class="chip" data-state="unanswered" aria-current="true" aria-label="Question 3, unanswered">3</button>
+      </div></div>
+      <div class="chip-legend" aria-hidden="true"><span class="chip-legend__item"><span class="chip" data-state="correct"></span>Correct</span><span class="chip-legend__item"><span class="chip" data-state="incorrect"></span>Incorrect</span><span class="chip-legend__item"><span class="chip" data-state="skipped"></span>Skipped</span><span class="chip-legend__item"><span class="chip" data-focus="true"></span>Focus</span></div>
+    </aside>
+    <div class="drawer-scrim" hidden></div>
+    <div class="focus__main stack">
+      <article class="question"><!-- see question.html / question-revealed.html --></article>
+    </div>
+  </div>
+</div>
