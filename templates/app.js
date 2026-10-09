@@ -206,12 +206,14 @@
   }
   function pageHead(eyebrow, title, desc, actions) {
     return '<div class="section-head"><div class="section-head__text">' + (eyebrow ? '<span class="eyebrow">' + eyebrow + '</span>' : '') +
-      '<h1>' + title + '</h1>' + (desc ? '<p class="section-head__desc">' + desc + '</p>' : '') + '</div>' +
-      (actions ? '<div class="cluster no-print">' + actions + '</div>' : '') + '</div>';
+      (actions ? '<div class="section-head__title"><h1>' + title + '</h1><div class="cluster no-print">' + actions + '</div></div>' : '<h1>' + title + '</h1>') +
+      (desc ? '<p class="section-head__desc">' + desc + '</p>' : '') + '</div></div>';
   }
+  var BACK_BTN = '<button class="btn btn--sm btn--ghost" data-action="home">' + icon('arrow-left', 'icon--sm') + 'Back</button>';
   function sectionHead(title, desc, actions) {
-    return '<div class="section-head"><div class="section-head__text"><h2>' + title + '</h2>' + (desc ? '<p class="section-head__desc">' + desc + '</p>' : '') + '</div>' +
-      (actions ? '<div class="cluster no-print">' + actions + '</div>' : '') + '</div>';
+    return '<div class="section-head"><div class="section-head__text">' +
+      (actions ? '<div class="section-head__title"><h2>' + title + '</h2><div class="cluster no-print">' + actions + '</div></div>' : '<h2>' + title + '</h2>') +
+      (desc ? '<p class="section-head__desc">' + desc + '</p>' : '') + '</div></div>';
   }
   function callout(kind, iconName, title, body, actions) {
     return '<div class="callout' + (kind ? ' callout--' + kind : '') + '"><span class="callout__icon">' + icon(iconName) + '</span><div class="callout__body">' +
@@ -296,7 +298,7 @@
     var which = cur === rec && hasAttempts ? 'Recommended order (weakest first)' : cur === courseOrder().join() ? 'Course order' : 'Custom order';
     var h = '<div class="page page--read stack stack--lg">';
     h += pageHead('Mock exam · step 1 of 2', 'Choose your section order',
-      'Drag the sections, or use the arrows. ' + M.exam_length + ' items' + (M.timer_minutes ? ' · ' + M.timer_minutes + '-minute timer' : ' · untimed') + '. Answers are revealed after you submit.');
+      'Drag the sections, or use the arrows. ' + M.exam_length + ' items' + (M.timer_minutes ? ' · ' + M.timer_minutes + '-minute timer' : ' · untimed') + '. Answers are revealed after you submit.', BACK_BTN);
     h += hasAttempts ? callout('', 'info', 'Weakest topics first is recommended', 'Based on your latest mock exam, topics are ordered weakest to strongest; topics you haven’t attempted come right after the weak ones.')
       : callout('neutral', 'info', 'Course order', 'After your first mock exam, a recommended order (weakest topics first) will appear here.');
     h += '<div class="cluster cluster--between"><span class="small muted">Using: <span class="strong">' + which + '</span></span><div class="cluster">' +
@@ -311,8 +313,7 @@
         '<button class="btn btn--icon btn--sm" data-action="move" data-topic="' + esc(tid) + '" data-dir="1" aria-label="Move ' + esc(t.name) + ' down"' + (i === ui.order.length - 1 ? ' disabled' : '') + '>' + icon('chevron-down', 'icon--sm') + '</button></span></li>';
     });
     h += '</ol>';
-    h += '<label class="check"><input type="checkbox" data-action="shuffle-within"' + (ui.shuffleWithin ? ' checked' : '') + '>Shuffle questions within each section</label>';
-    h += '<div class="cluster cluster--between"><button class="btn btn--ghost" data-action="home">' + icon('arrow-left', 'icon--sm') + 'Back</button>' +
+    h += '<div class="cluster cluster--between"><label class="check"><input type="checkbox" data-action="shuffle-within"' + (ui.shuffleWithin ? ' checked' : '') + '>Shuffle questions within each section</label>' +
       '<button class="btn btn--primary btn--lg" data-action="start-exam">' + icon('play', 'icon--sm') + 'Start mock exam</button></div></div>';
     return h;
   };
@@ -334,15 +335,29 @@
   /* ── 8. Exam ────────────────────────────────────────────────────────── */
   function sectionIndexOf(run, i) { var n = 0; for (var s = 0; s < run.sections.length; s++) { n += run.sections[s].items.length; if (i < n) return s; } return run.sections.length - 1; }
   function optionKey(it, i) { return isBinary(it) ? it.options[i].charAt(0) : LETTERS[i]; }
+  // Display order of an item's options: a shuffle seeded by attempt/session + item id, so it stays put across
+  // re-renders, resume and answer review. Values stay original indexes, so answers and scoring are unaffected.
+  function optOrder(it, seed) {
+    var idx = it.options.map(function (o, i) { return i; });
+    if (isBinary(it) || !seed) return idx;
+    var h = 2166136261, s = seed + '|' + it.id;
+    for (var c = 0; c < s.length; c++) h = Math.imul(h ^ s.charCodeAt(c), 16777619);
+    for (var i = idx.length - 1; i > 0; i--) {
+      h = Math.imul(h ^ (h >>> 15), 2246822507); h ^= h >>> 13;
+      var j = (h >>> 0) % (i + 1), t = idx[i]; idx[i] = idx[j]; idx[j] = t;
+    }
+    return idx;
+  }
   function optionsHTML(it, cfg) {
-    // cfg: {name, action, checked, disabled, states: [..], statuses: [..], skip: bool, skipChecked}
+    // cfg: {name, action, checked, disabled, states: [..], statuses: [..], skip: bool, skipChecked, seed}
     var multi = isMulti(it), mod = isBinary(it) ? ' options--inline' : multi ? ' options--multi' : '';
     var h = '<ul class="options' + mod + '" role="' + (multi ? 'group' : 'radiogroup') + '" aria-label="Answer choices"' + (cfg.disabled ? ' aria-disabled="true"' : '') + '>';
-    it.options.forEach(function (o, i) {
+    optOrder(it, cfg.seed).forEach(function (i, pos) {
+      var o = it.options[i];
       var st = cfg.states && cfg.states[i] ? ' data-state="' + cfg.states[i] + '"' : '';
       var inp = cfg.action ? '<input type="' + (multi ? 'checkbox' : 'radio') + '" name="' + cfg.name + '" value="' + i + '" data-action="' + cfg.action + '" data-id="' + esc(it.id) + '"' + (picked(cfg.checked, i) ? ' checked' : '') + (cfg.disabled ? ' disabled' : '') + '>' : '';
       var tag = cfg.action ? 'label' : 'div';
-      h += '<li><' + tag + ' class="option"' + st + '>' + inp + '<span class="option__key" aria-hidden="true">' + optionKey(it, i) + '</span><span class="option__text">' + esc(o) + '</span>' +
+      h += '<li><' + tag + ' class="option"' + st + '>' + inp + '<span class="option__key" aria-hidden="true">' + optionKey(it, pos) + '</span><span class="option__text">' + esc(o) + '</span>' +
         (cfg.statuses && cfg.statuses[i] ? '<span class="option__status">' + cfg.statuses[i] + '</span>' : '') + '</' + tag + '></li>';
     });
     if (cfg.skip) {
@@ -370,7 +385,7 @@
     var h = '<article class="question" id="q-' + i + '" data-index="' + i + '"' + (run.mode === 'all' && run.cur === i ? ' data-current="true"' : '') + '>';
     h += qMeta('Question ' + (i + 1) + ' of ' + run.items.length, it, isNewItem(it, seen) ? '<span class="badge badge--new">New</span>' : '');
     h += stemHTML(it);
-    h += optionsHTML(it, { name: 'q-' + id, action: 'answer', checked: run.answers[id] });
+    h += optionsHTML(it, { name: 'q-' + id, action: 'answer', checked: run.answers[id], seed: run.id });
     h += '<div class="question__tools"><button type="button" class="btn btn--sm" data-action="flag" data-id="' + esc(id) + '" aria-pressed="' + flagged + '">' + icon('flag', 'icon--sm') + (flagged ? 'Flagged' : 'Flag for review') + '</button>' +
       '<div class="cluster"><span class="segmented__caption">Confidence</span><div class="segmented" role="radiogroup" aria-label="Confidence">';
     CONF.forEach(function (c) {
@@ -577,7 +592,7 @@
     return '<li class="meter" data-band="' + band + '"><span class="meter__label">' + label + '</span><span class="meter__track" role="img" aria-label="' + esc(p) + '%"><span class="meter__fill" style="--pct: ' + p + '"></span></span>' +
       '<span class="meter__value">' + value + '</span><span class="meter__band">' + (extra || '') + '</span></li>';
   }
-  function reviewItemHTML(r, n) {
+  function reviewItemHTML(r, n, seed) {
     var it = ITEM[r.id]; if (!it) return '';
     var sec = reveal(r.id), rs = revealStates(sec.answer, r.answer, it.options.length);
     var extra = (r.result ? '<span class="badge badge--correct">' + icon('check', 'icon--sm') + 'Correct</span>' : r.answer == null ? '<span class="badge badge--incorrect">' + icon('x', 'icon--sm') + 'Unanswered</span>' : '<span class="badge badge--incorrect">' + icon('x', 'icon--sm') + 'Incorrect</span>') +
@@ -585,16 +600,16 @@
       (r.conf ? '<span class="badge badge--outline">' + (r.conf === 'sure' ? 'Sure' : 'Guessing') + '</span>' : '');
     var fb = r.result ? 'correct' : 'incorrect';
     return '<article class="question" id="review-' + esc(r.id) + '">' + qMeta('Question ' + n, it, extra) + stemHTML(it) +
-      optionsHTML(it, { disabled: true, states: rs.states, statuses: rs.statuses }) +
+      optionsHTML(it, { disabled: true, states: rs.states, statuses: rs.statuses, seed: seed }) +
       '<div class="feedback feedback--' + fb + '"><p class="feedback__body">' + esc(sec.explanation) + '</p><blockquote class="excerpt">' + esc(sec.source.excerpt) + '</blockquote><div>' + itemCitation(r.id) + '</div></div></article>';
   }
   VIEWS.results = function (p) {
     var a = store.attempts.filter(function (x) { return x.id === p.id; })[0];
-    if (!a) return '<div class="page">' + callout('danger', 'alert', 'Attempt not found', 'It may have been removed when browser data was cleared.', '<button class="btn btn--sm" data-action="home">Home</button>') + '</div>';
+    if (!a) return '<div class="page">' + callout('danger', 'alert', 'Attempt not found', 'It may have been removed when browser data was cleared.', '<button class="btn btn--sm" data-action="home">Back</button>') + '</div>';
     var A = analyze(a), band = bandOf(A.p);
     var h = '<div class="page stack stack--xl">';
     h += pageHead('Mock exam results · attempt ' + A.n, esc(fmtDate(a.date, true)), 'Mastery below is updated from this attempt.',
-      '<button class="btn btn--sm" data-action="print">' + icon('print', 'icon--sm') + 'Print / Save PDF</button><button class="btn btn--sm btn--primary" data-action="retake">' + icon('target', 'icon--sm') + 'Retake with recommended order</button>');
+      BACK_BTN + '<button class="btn btn--sm" data-action="print">' + icon('print', 'icon--sm') + 'Print / Save PDF</button><button class="btn btn--sm btn--primary" data-action="retake">' + icon('target', 'icon--sm') + 'Retake with recommended order</button>');
 
     h += '<div class="score-hero"><div class="stack stack--sm"><span class="score-hero__value">' + A.p + '%</span>' + bandPill(band) + '</div><div class="stack">' +
       '<p class="score-hero__caption">' + A.correct + ' of ' + A.total + ' correct' + (A.prevP != null ? ' · ' + trendHTML(A.p, A.prevP) + ' vs previous mock exam (' + A.prevP + '%)' : ' · your first mock exam') + '</p>' +
@@ -664,11 +679,11 @@
     var shown = 0;
     a.items.forEach(function (r, i) {
       var ok = ui.filter === 'all' || (ui.filter === 'incorrect' && !r.result) || (ui.filter === 'flagged' && r.flag) || (ui.filter === 'low' && lowConf(r));
-      if (ok) { h += reviewItemHTML(r, i + 1); shown++; }
+      if (ok) { h += reviewItemHTML(r, i + 1, a.id); shown++; }
     });
     if (!shown) h += '<div class="empty"><span class="empty__title">No ' + (ui.filter === 'low' ? 'guessed' : ui.filter) + ' questions in this attempt</span><button type="button" class="btn btn--sm" data-action="filter" data-filter="all">Show all ' + counts.all + '</button></div>';
     h += '</div></section>';
-    h += '<div class="cluster cluster--between no-print"><button class="btn btn--ghost" data-action="home">' + icon('arrow-left', 'icon--sm') + 'Home</button><button class="btn btn--primary" data-action="retake">' + icon('target', 'icon--sm') + 'Retake with recommended order</button></div>';
+    h += '<div class="cluster cluster--between no-print"><button class="btn btn--ghost" data-action="home">' + icon('arrow-left', 'icon--sm') + 'Back</button><button class="btn btn--primary" data-action="retake">' + icon('target', 'icon--sm') + 'Retake with recommended order</button></div>';
     h += '</div>';
     return h;
   };
@@ -684,9 +699,12 @@
   VIEWS.picker = function () {
     var mm = masteryMap(), seen = attemptedIds(), last = store.attempts[store.attempts.length - 1];
     var h = '<div class="page stack stack--xl">';
-    h += pageHead('', 'Practice by topic', 'Instant feedback after every question. Practice results never change your mastery; only mock exams do.');
-    h += '<div class="cluster"><span class="small strong">Questions per session</span><div class="segmented" role="radiogroup" aria-label="Session length">' +
-      [['10', '10'], ['20', '20'], ['all', 'All']].map(function (o) { return '<span class="segmented__option"><input type="radio" id="len-' + o[0] + '" name="plen" value="' + o[0] + '" data-action="plen"' + (ui.practiceLen === o[0] ? ' checked' : '') + '><label class="segmented__label" for="len-' + o[0] + '">' + o[1] + '</label></span>'; }).join('') + '</div></div>';
+    h += pageHead('', 'Practice by topic', 'Quizzes are split by topic, one card each. Start a whole topic, or drill down by picking one of its subtopics on the card. Every question gives instant feedback. Practice results never change your mastery; only mock exams do.', BACK_BTN);
+    function seg(name, label, cur, opts) {
+      return '<span class="small strong">' + label + '</span><div class="segmented" role="radiogroup" aria-label="' + label + '">' +
+        opts.map(function (o) { return '<span class="segmented__option"><input type="radio" id="' + name + '-' + o[0] + '" name="' + name + '" value="' + o[0] + '" data-action="' + name + '"' + (cur === o[0] ? ' checked' : '') + '><label class="segmented__label" for="' + name + '-' + o[0] + '">' + o[1] + '</label></span>'; }).join('') + '</div>';
+    }
+    var len = seg('plen', 'Questions per session', ui.practiceLen, [['10', '10'], ['20', '20'], ['all', 'All']]);
 
     var focus = TOPICS.filter(function (t) { return mm[t.id].band === 'weak' || mm[t.id].band === 'review'; })
       .sort(function (x, y) { return (mm[x.id].pct || 0) - (mm[y.id].pct || 0); });
@@ -695,7 +713,7 @@
     else if (!focus.length) h += callout('success', 'check', 'No weak topics in your latest mock exam', 'Pick any topic below to keep it fresh.');
     else { h += '<div class="grid grid--3">'; focus.forEach(function (t) { h += topicCard(t, mm, seen, last); }); h += '</div>'; }
     h += '</section>';
-    h += '<section class="section">' + sectionHead('All topics', 'In course order.') + '<div class="grid grid--3">';
+    h += '<section class="section">' + sectionHead('All topics', 'In course order.', len) + '<div class="grid grid--3">';
     TOPICS.forEach(function (t) { h += topicCard(t, mm, seen, last); });
     h += '</div></section></div>';
     return h;
@@ -724,7 +742,7 @@
     var rest = shuffle(items.filter(function (it) { return !fset[it.id] && !useen[it.id]; }));
     var q = onlyIds ? shuffle(items) : focus.concat(unseen, rest);
     var n = ui.practiceLen === 'all' || onlyIds ? q.length : Math.min(q.length, Number(ui.practiceLen));
-    ui.prac = { tid: tid, sub: sub || null, queue: q.slice(0, n).map(function (it) { return { id: it.id, focus: !!fset[it.id], retry: false, state: null, answer: null }; }), idx: 0, requeued: false, counted: false };
+    ui.prac = { tid: tid, sub: sub || null, queue: q.slice(0, n).map(function (it) { return { id: it.id, focus: !!fset[it.id], retry: false, state: null, answer: null }; }), idx: 0, requeued: false, counted: false, seed: 'p' + Date.now() };
     go('practice');
   }
   function practiceTitle(P) { return esc(TOPIC[P.tid] ? TOPIC[P.tid].name : 'Practice') + (P.sub ? ' · ' + esc(P.sub) : ''); }
@@ -751,12 +769,12 @@
     var extra = (e.focus ? '<span class="badge badge--focus">' + icon('target', 'icon--sm') + 'Focus</span>' : '') + (e.retry ? '<span class="badge badge--flag">Second try</span>' : '');
     h += '<article class="question" id="q-p">' + qMeta('Question ' + (P.idx + 1) + ' of ' + P.queue.length, it, extra) + stemHTML(it);
     if (!e.state) {
-      h += optionsHTML(it, { name: 'p-' + P.idx, action: 'panswer', skip: true, checked: e.pick });
+      h += optionsHTML(it, { name: 'p-' + P.idx, action: 'panswer', skip: true, checked: e.pick, seed: P.seed });
       // Multi-select can't answer on one click: the student ticks options, then checks.
       if (isMulti(it)) h += '<div class="question__tools"><span class="push"></span><button type="button" class="btn btn--primary" data-action="pcheck"' + (e.pick && e.pick.length ? '' : ' disabled') + '>' + icon('check', 'icon--sm') + 'Check answer</button></div>';
     } else {
       var sec = reveal(e.id), rs = revealStates(sec.answer, e.answer, it.options.length);
-      h += optionsHTML(it, { disabled: true, states: rs.states, statuses: rs.statuses });
+      h += optionsHTML(it, { disabled: true, states: rs.states, statuses: rs.statuses, seed: P.seed });
       var v = e.state === 'correct' ? ['correct', 'check', 'Correct'] : e.state === 'incorrect' ? ['incorrect', 'x', 'Not quite'] : ['skipped', 'help', 'Skipped — here’s the answer'];
       h += '<div class="feedback feedback--' + v[0] + '" role="status"><p class="feedback__verdict">' + icon(v[1]) + v[2] + '</p><p class="feedback__body">' + esc(sec.explanation) + '</p>' +
         '<blockquote class="excerpt">' + esc(sec.source.excerpt) + '</blockquote><div>' + itemCitation(e.id) + '</div></div>';
@@ -810,7 +828,7 @@
     var missed = first.filter(function (x) { return x.state !== 'correct'; });
     var p = pct(right, first.length);
     var h = '<div class="page page--read stack stack--lg">';
-    h += pageHead('Practice · ' + practiceTitle(P), 'Session summary', '');
+    h += pageHead('Practice · ' + practiceTitle(P), 'Session summary', '', BACK_BTN);
     h += callout('neutral', 'info', 'Practice results — doesn’t affect mastery.', 'Take a mock exam to update your mastery.');
     h += '<div class="stat-grid"><div class="stat"><span class="stat__label">First try</span><span class="stat__value">' + p + '<span class="stat__unit">%</span></span><span class="stat__foot">' + right + ' of ' + first.length + ' correct</span></div>' +
       '<div class="stat"><span class="stat__label">Second try</span><span class="stat__value">' + fixed + '<span class="stat__unit">/' + retries.length + '</span></span><span class="stat__foot">fixed on retry</span></div></div>';
@@ -859,7 +877,7 @@
     var page = p.page != null ? Number(p.page) : (src.cited_pages && src.cited_pages[0]) || avail[0];
     var h = '<div class="page stack stack--lg">';
     h += pageHead('', 'Browse sources', 'Every question comes from these files in <span class="strong">sources/</span>.',
-      ui.back ? '<button class="btn btn--primary btn--sm" data-action="back">' + icon('arrow-left', 'icon--sm') + ui.back.label + '</button>' : '<button class="btn btn--sm btn--ghost" data-action="home">' + icon('arrow-left', 'icon--sm') + 'Home</button>');
+      ui.back ? '<button class="btn btn--primary btn--sm" data-action="back">' + icon('arrow-left', 'icon--sm') + ui.back.label + '</button>' : BACK_BTN);
     h += '<div class="split split--wide-side"><aside class="sidebar" aria-label="Files in sources"><span class="eyebrow">' + icon('folder', 'icon--sm') + ' sources/</span><ul class="file-list">';
     SOURCES.forEach(function (s) {
       var t = typeOf(s.file), cur = s.file === file;
@@ -1021,17 +1039,17 @@
     var t = e.target, tag = t && t.tagName;
     if ((tag === 'INPUT' && t.type !== 'radio' && t.type !== 'checkbox') || tag === 'TEXTAREA' || tag === 'SELECT') return;
     var k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-    function choice(it) {
+    function choice(it, seed) {
       if (isBinary(it)) { var first = it.options.map(function (o) { return o.charAt(0).toLowerCase(); }); if (k === first[0] || k === '1' || k === 'a') return 0; if (k === first[1] || k === '2' || k === 'b') return 1; return -1; }
       var i = '123456'.indexOf(k); if (i < 0) i = 'abcdef'.indexOf(k);
-      return i < it.options.length ? i : -1;
+      return i < it.options.length ? optOrder(it, seed)[i] : -1;
     }
     if (ui.view === 'exam' && store.inProgress) {
       var run = store.inProgress, id = run.items[run.cur], it = ITEM[id];
       if (k === 'ArrowLeft') { e.preventDefault(); gotoIndex(run.cur - 1); return; }
       if (k === 'ArrowRight') { e.preventDefault(); gotoIndex(run.cur + 1); return; }
       if (k === 'm') { e.preventDefault(); toggleFlag(id); return; }  // M = mark; F answers False
-      var c = choice(it); if (c >= 0) { e.preventDefault(); setAnswer(id, isMulti(it) ? toggled(run.answers[id], c) : c); }
+      var c = choice(it, run.id); if (c >= 0) { e.preventDefault(); setAnswer(id, isMulti(it) ? toggled(run.answers[id], c) : c); }
     } else if (ui.view === 'practice' && ui.prac) {
       var P = ui.prac, en = P.queue[P.idx];
       if (en.state) { if (k === 'Enter' || k === 'ArrowRight') { e.preventDefault(); practiceNext(); } return; }
